@@ -16,6 +16,13 @@ class PostTitles extends Extension
 
         $config->set_default_bool(PostTitlesConfig::DEFAULT_TO_FILENAME, false);
         $config->set_default_bool(PostTitlesConfig::SHOW_IN_WINDOW_TITLE, false);
+
+        global $database;
+
+        if ($this->get_version(PostTitlesConfig::VERSION) < 1) {
+            $database->Execute("ALTER TABLE images ADD COLUMN title varchar(255) NULL");
+            $this->set_version(PostTitlesConfig::VERSION, 1);
+        }
     }
 
     private function onDatabaseUpgrade(DatabaseUpgradeEvent $event)
