@@ -360,3 +360,7 @@ margin-top:0.5rem;
 #Imagemain h3 {
 display:none;
 }
+.post_title .view {
+font-size: 200%;
+font-weight: bold;
+}
