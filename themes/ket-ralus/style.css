@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap');
 .noleft{
 padding-left:2rem;
 }
@@ -8,7 +9,7 @@ HEADER #site-title {
 padding:0.6rem 2rem 0.25rem;
 }
 HEADER ul#navbar, HEADER ul#subnavbar {
-font-family:Verdana,Helvetica,sans-serif;
+font-family: 'Manrope', sans-serif;
 font-size:110%;
 }
 HEADER ul#navbar {
@@ -25,18 +26,18 @@ padding:0.4rem 0.6rem;
 }
 HEADER ul#navbar li:first-child a {
 margin-left: -0.6rem;
-color: #FF3333;
+color: #C42126;
 font-weight: bold;
 }
 HEADER ul#navbar li a.current-page {
-background-color:#EEEEFF;
+background-color:#EEFFEE;
 border-radius:0.2rem 0.2rem 0 0;
 font-weight:bold;
 }
 HEADER ul#subnavbar {
 margin:0 0 0.5rem;
 padding:0 1rem 0 2rem;
-background-color:#EEEEFF;
+background-color:#EEFFEE;
 }
 HEADER ul#subnavbar li {
 display:inline-block;
@@ -79,8 +80,8 @@ h5 {
 font-size:1.2rem;
 }
 table.zebra {border-spacing: 0;border-collapse: collapse;}
-table.zebra > tbody > tr:hover {background: #FFD;}
-table.zebra th { padding-right: 0.4rem;color: #171BB3;}
+table.zebra > tbody > tr:hover {background: #FDF;}
+table.zebra th { padding-right: 0.4rem;color: #17B31B;}
 table.zebra td {margin: 0;padding-right: 0.6rem;border: 1px dotted #EEE;}
 table.zebra th {margin: 0;text-align: left;}
 thead {
@@ -101,10 +102,10 @@ font-size:0.75em;
 }
 FOOTER {
 clear:both;
-border-top:solid 1px #E7E7F7;
+border-top:solid 1px #E7F7E7;
 margin-top:1rem;
 text-align:center;
-color:#555555;
+color:#EEEEEE;
 font-size:0.8rem;
 }
 FOOTER > DIV {
@@ -290,22 +291,22 @@ text-align:left;
 * {
 margin:0;
 padding:0;
-font-family:Tahoma,Verdana,Helvetica,sans-serif;
+font-family: 'Manrope', sans-serif;
 }
 a:link {
-color:#006FFA;
+color:#009933;
 text-decoration:none;
 }
 a:visited {
-color:#006FFA;
+color:#009933;
 text-decoration:none;
 }
 a:hover {
-color:#33CFFF;
+color:#D5CC00;
 text-decoration:none;
 }
 a:active {
-color:#006FFA;
+color:#009933;
 text-decoration:none;
 }
 ul.flat-list {
@@ -360,7 +361,126 @@ margin-top:0.5rem;
 #Imagemain h3 {
 display:none;
 }
+
+
+/* CUSTOM */
+
+FOOTER a:link, FOOTER a:visited {
+color:#EEEEEE;
+}
 .post_title .view {
 font-size: 200%;
 font-weight: bold;
+}
+.shm-image-list {
+margin-top: 2em;
+}
+.shm-thumb {
+margin: 2em;
+line-height: 9em;
+}
+.tagit-label {
+color:#EEFFEE;
+font-weight: bold;
+}
+
+
+/* FRONT PAGE */
+
+div#front-page {
+	background: #fff url('Redemption3445_Brask_Ket_2019.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	position: absolute; top: 0; left: 0; height: 100%; width: 100%;
+}
+div#front-page div#links a, div#front-page div#message {
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 20vmin;
+	-moz-border-radius: 20vmin;
+}
+div#front-page h1 a span {
+	background: transparent url('bg_fade_025.png') no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding: 2vmin;
+	padding-bottom: 1vmin;
+}
+div#front-page h1 a {
+	font-size: 7vmin;
+}
+div#front-page h1 a:link,
+div#front-page h1 a:visited {
+	color: #C42126;
+}
+div#front-page h1 a:hover,
+div#front-page h1 a:active {
+    color: #41A101;
+}
+div#front-page h1 {
+	margin-top: 0 !important;
+	padding-bottom: 6vmin;
+}
+div#front-page div#links {
+	margin-top: 30vmin;
+}
+div#front-page div#links a {
+	padding: 5px;
+	line-height: 2em;
+}
+div#front-page div#links a:link,
+div#front-page div#links a:visited {
+	color: #C42126;
+}
+div#front-page div#links a:hover,
+div#front-page div#links a:active {
+    color: #41A101;
+}
+div#front-page div#message {
+	background: transparent url('bg_fade.png') no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	opacity: 0.8;
+	filter: alpha(opacity=80); /* For IE8 and earlier */
+	margin-left: 8px;
+	margin-right: 8px;
+	margin-bottom: 32px;
+	padding: 8px;
+}
+div#front-page div#message * {
+	color: #000;
+}
+div#front-page div#message a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+div#front-page div#disclaimer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 85%;
+	max-width: 50em;
+}
+div#front-page div#disclaimer ul {
+	padding-left: 2vmin;
+	list-style: disc outside none;
+}
+div#front-page div#disclaimer ul li {
+	list-style: disc outside none;
+}
+div#front-page div#disclaimer ul li.sub {
+	list-style: square outside none;
+}
+div#front-page div#counter {
+    margin-top: 14em;
+    margin-bottom: 0;
+}
+div#front-page div#foot {
+    margin-top: 0;
+    margin-bottom: 2em;
 }
