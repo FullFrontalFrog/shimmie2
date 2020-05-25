@@ -8,6 +8,7 @@ class CustomViewImageTheme extends ViewImageTheme
         $page->set_heading(html_escape($image->get_tag_list()));
         $page->add_block(new Block("Search", $this->build_navigation($image), "left", 0));
         $page->add_block(new Block("Information", $this->build_information($image), "left", 15));
+        $page->add_block(new Block($this->build_artist($image), $this->build_title($image), "main", 0));
         $page->add_block(new Block(null, $this->build_info($image, $editor_parts), "main", 15));
     }
 
@@ -17,7 +18,7 @@ class CustomViewImageTheme extends ViewImageTheme
         $h_ownerlink = "<a href='".make_link("user/$h_owner")."'>$h_owner</a>";
         $h_ip = html_escape($image->owner_ip);
         $h_type = html_escape($image->get_mime_type());
-        $h_date = autodate($image->posted);
+        $h_date = $image->posted."<br />(".autodate($image->posted).")";
         $h_filesize = to_shorthand_int($image->filesize);
 
         global $user;
@@ -68,10 +69,56 @@ class CustomViewImageTheme extends ViewImageTheme
 				<input name='search' type='text'  style='width:75%'>
 				<input type='submit' value='Go' style='width:20%'>
 				<input type='hidden' name='q' value='/post/list'>
-				<input type='submit' value='Find' style='display: none;'>
+				<input type='submit' value='Find' style='display: none; width:20%'>
 			</form>
 		";
 
         return "$h_search";
+    }
+
+    private function build_artist(Image $image): string
+    {
+        $tags = $image->get_tag_list();
+        $matches = [];
+        preg_match_all("/\@\w+/", $tags, $matches);
+        $artists = $matches[0];
+        $artist_count = count($artists);
+        $artist_string = "";
+        for ($i = 0; $i < $artist_count; $i++)
+        {
+            $a = $artists[$i];
+            if ($i > 0)
+            {
+                $artist_string = $artist_string.", ";
+            }
+            if ($a == "@KetRalus")
+            {
+                $artist_string = $artist_string."Ket✦Ralus";
+                if ($artist_count == 1)
+                {
+                    $artist_string = $artist_string." <span style='opacity: 0.3'>(@KetRalus)</span>";
+                }
+            }
+            else
+            {
+                $artist_string = $artist_string.$a;
+            }
+        }
+        return "Art By ".$artist_string;
+    }
+
+    private function build_title(Image $image): string
+    {
+        $year = date("Y");
+        $posted_year = substr($image->posted, 0, 4);
+        $h_year = "";
+        if ($year != $posted_year)
+        {
+            $h_year = " <span style='opacity: 0.3'>($posted_year)</span>";
+        }
+        $html = "
+        <h1 style='line-height: 75%;'>".$image->title.$h_year."</h1>
+        ";
+        return $html;
     }
 }
