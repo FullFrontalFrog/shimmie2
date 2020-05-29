@@ -160,6 +160,8 @@ $header_html
 			$main_block_html
 		</article>
 		<footer><div>
+			$contact<br />
+			<br />
 			Running Shimmie &ndash;
 			Images &copy; their respective owners,
 			<a href="https://code.shishnet.org/shimmie2/">Shimmie</a> &copy;
@@ -168,7 +170,6 @@ $header_html
 			2007-2019,
 			based on the Danbooru concept<br />
 			$debug
-			$contact
 		</div></footer>
 	</body>
 </html>

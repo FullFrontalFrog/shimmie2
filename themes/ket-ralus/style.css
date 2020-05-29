@@ -102,10 +102,9 @@ font-size:0.75em;
 }
 FOOTER {
 clear:both;
-border-top:solid 1px #E7F7E7;
 margin-top:1rem;
 text-align:center;
-color:#EEEEEE;
+color:#99FF99;
 font-size:0.8rem;
 }
 FOOTER > DIV {
@@ -207,10 +206,10 @@ padding:4px 8px;
 div#paginator a {
 margin:3px;
 padding:4px 8px;
-border:1px solid #EEEEEE;
+border:1px solid #EEE;
 }
 div#paginator a:hover {
-border:1px solid #EEEEEE;
+border:1px solid #EEE;
 background:blue none repeat scroll 0 0;
 color:white;
 -moz-background-clip:border;
@@ -366,7 +365,7 @@ display:none;
 /* CUSTOM */
 
 FOOTER a:link, FOOTER a:visited {
-color:#EEEEEE;
+color:#99FF99;
 }
 .post_title .view {
 font-size: 200%;

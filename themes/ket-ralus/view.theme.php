@@ -7,9 +7,61 @@ class CustomViewImageTheme extends ViewImageTheme
         global $page;
         $page->set_heading(html_escape($image->get_tag_list()));
         $page->add_block(new Block("Search", $this->build_navigation($image), "left", 0));
+        $page->add_block(new Block("Image Tags", $this->build_image_tags($image), "left", 1));
+        // related tags
         $page->add_block(new Block("Information", $this->build_information($image), "left", 15));
         $page->add_block(new Block($this->build_artist($image), $this->build_title($image), "main", 0));
         $page->add_block(new Block(null, $this->build_info($image, $editor_parts), "main", 15));
+    }
+
+    private function build_artist(Image $image): string
+    {
+        $tags = $image->get_tag_list();
+        $matches = [];
+        preg_match_all("/\@\w+/", $tags, $matches);
+        $artists = $matches[0];
+        $artist_count = count($artists);
+        $html = "Art By ";
+        $twitter = "https://twitter.com/";
+        for ($i = 0; $i < $artist_count; $i++)
+        {
+            $a = $artists[$i];
+            if ($i > 0)
+            {
+                $html .= ", ";
+            }
+            if ($a == "@KetRalus")
+            {
+                $html .= "Ket✦Ralus";
+                if ($artist_count == 1)
+                {
+                    $url = str_replace("@", $twitter, $a);
+                    $href = "href='$url' target='blank'";
+                    $style = "style='color: black; opacity: 0.3;'";
+                    $html .= " <a $href $style>(@KetRalus)</a>";
+                }
+            }
+            else
+            {
+                $url = str_replace("@", $twitter, $a);
+                $html .= "<a href='$url' target='blank'>$a</a>";
+            }
+        }
+        return $html;
+    }
+
+    private function build_image_tags(Image $image): string
+    {
+        $tag_links = [];
+        foreach ($image->get_tag_array() as $tag) {
+            $h_tag = html_escape($tag);
+            $u_tag = url_escape($tag);
+            $h_link = make_link("post/list/$u_tag/1");
+            $tag_links[] = "<a href='$h_link'>$h_tag</a>";
+        }
+        $h_tag_links = Tag::implode($tag_links);
+
+        return "<span class='view'>$h_tag_links</span>";
     }
 
     private function build_information(Image $image): string
@@ -27,7 +79,7 @@ class CustomViewImageTheme extends ViewImageTheme
         }
 
         $html = "
-		ID: {$image->id}
+		KRID: {$image->id}
 		<br>Uploader: $h_ownerlink
 		<br>Date: $h_date
 		<br>Size: $h_filesize ({$image->width}x{$image->height})
@@ -74,37 +126,6 @@ class CustomViewImageTheme extends ViewImageTheme
 		";
 
         return "$h_search";
-    }
-
-    private function build_artist(Image $image): string
-    {
-        $tags = $image->get_tag_list();
-        $matches = [];
-        preg_match_all("/\@\w+/", $tags, $matches);
-        $artists = $matches[0];
-        $artist_count = count($artists);
-        $artist_string = "";
-        for ($i = 0; $i < $artist_count; $i++)
-        {
-            $a = $artists[$i];
-            if ($i > 0)
-            {
-                $artist_string = $artist_string.", ";
-            }
-            if ($a == "@KetRalus")
-            {
-                $artist_string = $artist_string."Ket✦Ralus";
-                if ($artist_count == 1)
-                {
-                    $artist_string = $artist_string." <span style='opacity: 0.3'>(@KetRalus)</span>";
-                }
-            }
-            else
-            {
-                $artist_string = $artist_string.$a;
-            }
-        }
-        return "Art By ".$artist_string;
     }
 
     private function build_title(Image $image): string
