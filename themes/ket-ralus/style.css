@@ -48,7 +48,7 @@ HEADER ul#subnavbar li:first-child {
 margin-left: -0.6rem;
 }
 body {
-background-color:#FFFFFF;
+background-color:#FFF;
 font-weight:normal;
 font-style:normal;
 font-variant:normal;
@@ -104,7 +104,7 @@ FOOTER {
 clear:both;
 margin-top:1rem;
 text-align:center;
-color:#99FF99;
+color:#CCFFCC;
 font-size:0.8rem;
 }
 FOOTER > DIV {
@@ -365,7 +365,7 @@ display:none;
 /* CUSTOM */
 
 FOOTER a:link, FOOTER a:visited {
-color:#99FF99;
+color:#AAFFAA;
 }
 .post_title .view {
 font-size: 200%;

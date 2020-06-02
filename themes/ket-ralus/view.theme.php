@@ -57,7 +57,7 @@ class CustomViewImageTheme extends ViewImageTheme
             $h_tag = html_escape($tag);
             $u_tag = url_escape($tag);
             $h_link = make_link("post/list/$u_tag/1");
-            $tag_links[] = "<a href='$h_link'>$h_tag</a>";
+            $tag_links[] = "<a href='$h_link'>$h_tag</a><br />";
         }
         $h_tag_links = Tag::implode($tag_links);
 
