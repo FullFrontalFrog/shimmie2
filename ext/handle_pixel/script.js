@@ -39,7 +39,7 @@ $(function() {
 
 	$("img.shm-main-image").click(function(e) {
 		switch(Cookies.get("ui-image-zoom")) {
-			case "full": zoom("width"); break;
+			case "full": zoom("both"); break;
 			default: zoom("full"); break;
 		}
 	});
@@ -47,4 +47,7 @@ $(function() {
 	if(Cookies.get("ui-image-zoom")) {
 		zoom(Cookies.get("ui-image-zoom"));
 	}
+    else {
+        zoom("both");
+    }
 });
