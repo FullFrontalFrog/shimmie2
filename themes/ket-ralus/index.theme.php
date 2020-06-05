@@ -50,4 +50,26 @@ class CustomIndexTheme extends IndexTheme
         $table .= "</div>";
         return $table;
     }
+
+    /**
+     * #param Image[] $images
+     */
+    protected function display_page_images(Page $page, array $images)
+    {
+        $page_paren = "<span style='opacity: 0.3'>(Page $this->page_number)</span>";
+        if (count($this->search_terms) > 0) {
+            if ($this->page_number > 3) {
+                // only index the first pages of each term
+                $page->add_html_header('<meta name="robots" content="noindex, nofollow">');
+            }
+            $query = url_escape(implode(' ', $this->search_terms));
+            $block_title = "Query: $query $page_paren";
+            $page->add_block(new Block($block_title, $this->build_table($images, "#search=$query"), "main", 10, "image-list"));
+            $this->display_paginator($page, "post/list/$query", null, $this->page_number, $this->total_pages, true);
+        } else {
+            $block_title = "All Posts $page_paren";
+            $page->add_block(new Block($block_title, $this->build_table($images, null), "main", 10, "image-list"));
+            $this->display_paginator($page, "post/list", null, $this->page_number, $this->total_pages, true);
+        }
+    }
 }
