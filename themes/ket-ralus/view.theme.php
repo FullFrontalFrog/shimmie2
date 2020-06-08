@@ -130,15 +130,26 @@ class CustomViewImageTheme extends ViewImageTheme
 
     private function build_title(Image $image): string
     {
-        $year = date("Y");
-        $posted_year = substr($image->posted, 0, 4);
-        $h_year = "";
-        if ($year != $posted_year)
+        $title = $image->title;
+        $year_open = "<span style='opacity: 0.3'>";
+        $year_close = "</span>";
+        $matches = [];
+        if (preg_match("/\(\d{4}\)/", $title, $matches))
         {
-            $h_year = " <span style='opacity: 0.3'>($posted_year)</span>";
+            $title_year = $matches[0];
+            $title = str_replace($title_year, $year_open.$title_year.$year_close, $title);
+        }
+        else
+        {
+            $year = date("Y");
+            $posted_year = substr($image->posted, 0, 4);
+            if ($year != $posted_year)
+            {
+                $title .= " $year_open($posted_year)$year_close";
+            }
         }
         $html = "
-        <h1 style='line-height: 75%;'>".$image->title.$h_year."</h1>
+        <h1 style='line-height: 75%;'>$title</h1>
         ";
         return $html;
     }
