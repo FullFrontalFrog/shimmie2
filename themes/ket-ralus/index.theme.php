@@ -12,8 +12,8 @@ class CustomIndexTheme extends IndexTheme
         $nav = $this->build_navigation($this->page_number, $this->total_pages, $this->search_terms);
         $page->add_block(new Block("Search", $nav, "left", 0));
 
-        $page_block = $this->build_page_block($this->page_number, $this->total_pages, $this->search_terms);
-        $page->add_block(new Block("Page", $page_block, "left", 1));
+        $page_block = $this->build_page_nav_block($this->page_number, $this->total_pages, $this->search_terms);
+        $page->add_block(new Block("Page Nav", $page_block, "left", 1));
 
         if (count($images) > 0) {
             $this->display_page_images($page, $images);
@@ -43,7 +43,7 @@ class CustomIndexTheme extends IndexTheme
     /**
      * #param string[] $search_terms
      */
-    protected function build_page_block(int $page_number, int $total_pages, array $search_terms): string
+    protected function build_page_nav_block(int $page_number, int $total_pages, array $search_terms): string
     {
         $url_base = "/post/list/";
         $newer = "<span class='newer_disabled'>« Newer</span>";
@@ -64,8 +64,8 @@ class CustomIndexTheme extends IndexTheme
             $older = "<a class='older_enabled' href='$older_url'>Older »</a>";
         }
         $pipe = "<span class='pipe'>&nbsp;|&nbsp;</span>";
-        $page_block = "<p class='krg_page_block'>$newer $pipe $older</p>";
-        return $page_block;
+        $block_html = "<p class='krg_page_nav_block'>$newer $pipe $older</p>";
+        return $block_html;
     }
 
     /**

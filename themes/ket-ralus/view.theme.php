@@ -7,7 +7,8 @@ class CustomViewImageTheme extends ViewImageTheme
         global $page;
         $page->set_heading(html_escape($image->get_tag_list()));
         $page->add_block(new Block("Search", $this->build_navigation($image), "left", 0));
-        $page->add_block(new Block("Image Tags", $this->build_image_tags($image), "left", 1));
+        $page->add_block(new Block("Image Nav", $this->build_image_nav_block($image), "left", 1));
+        $page->add_block(new Block("Image Tags", $this->build_image_tags($image), "left", 2));
         // related tags
         $page->add_block(new Block("Information", $this->build_information($image), "left", 15));
         $page->add_block(new Block($this->build_artist($image), $this->build_title($image), "main", 0));
@@ -48,6 +49,26 @@ class CustomViewImageTheme extends ViewImageTheme
             }
         }
         return $html;
+    }
+
+    private function build_image_nav_block(Image $image): string
+    {
+        $url_base = "/post/view/";
+        $newer = "<span class='newer_disabled'>« Newer</span>";
+        $older = "<span class='older_disabled'>Older »</span>";
+        if (true) // TODO: get most recent KRID for comparison
+        {
+            $newer_url = $url_base.($image->id + 1);
+            $newer = "<a class='newer_enabled' href='$newer_url'>« Newer</a>";
+        }
+        if ($image->id > 20000)
+        {
+            $older_url = $url_base.($image->id - 1);
+            $older = "<a class='older_enabled' href='$older_url'>Older »</a>";
+        }
+        $pipe = "<span class='pipe'>&nbsp;|&nbsp;</span>";
+        $block_html = "<p class='krg_image_nav_block'>$newer $pipe $older</p>";
+        return $block_html;
     }
 
     private function build_image_tags(Image $image): string
