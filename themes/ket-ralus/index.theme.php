@@ -94,7 +94,8 @@ class CustomIndexTheme extends IndexTheme
                 $page->add_html_header('<meta name="robots" content="noindex, nofollow">');
             }
             $query = url_escape(implode(' ', $this->search_terms));
-            $block_title = "Query: $query $page_paren";
+            $query_text = urldecode($query);
+            $block_title = "Query: $query_text $page_paren";
             $page->add_block(new Block($block_title, $this->build_table($images, "#search=$query"), "main", 10, "image-list"));
             $this->display_paginator($page, "post/list/$query", null, $this->page_number, $this->total_pages, true);
         } else {

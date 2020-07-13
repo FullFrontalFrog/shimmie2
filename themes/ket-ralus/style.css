@@ -403,11 +403,6 @@ div#front-page div#links a, div#front-page div#message {
 	-moz-border-radius: 20vmin;
 }
 div#front-page h1 a span {
-	background: transparent url('bg_fade_025.png') no-repeat center center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
 	padding: 2vmin;
 	padding-bottom: 1vmin;
 }
@@ -484,4 +479,10 @@ div#front-page div#counter {
 div#front-page div#foot {
     margin-top: 0;
     margin-bottom: 2em;
+}
+
+@media only screen and (min-width: 1128px) {
+  header {
+	background: transparent url('bg_shell.png') no-repeat right top;
+  }
 }
