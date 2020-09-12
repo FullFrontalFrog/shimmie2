@@ -206,11 +206,11 @@ padding:4px 8px;
 }
 div#paginator a {
 margin:3px;
-padding:4px 8px;
-border:1px solid #EEE;
+padding:12px 16px;
+border:1px solid #009933;
 }
 div#paginator a:hover {
-border:1px solid #EEE;
+border:1px solid white;
 background:#009933 none repeat scroll 0 0;
 color:white;
 -moz-background-clip:border;
@@ -372,9 +372,26 @@ FOOTER a:link, FOOTER a:visited {
     font-size: 200%;
     font-weight: bold;
 }
+.shm-thumb-has_child img {
+    border-color: lime !important;
+}
+.shm-thumb-has_parent img {
+    border-color: #0c0 !important;
+}
+.shm-thumb-has_child.shm-thumb-has_parent img {
+    border-color: lime #0c0 #0c0 lime !important;
+}
 .shm-image-list {
     margin-top: 2em;
     max-width: 888px;
+}
+.shm-image-list a img {
+    border-width: 1px !important;
+    border-style: solid;
+    border-color: #009933;
+}
+.shm-image-list a:hover img {
+    border-color: #D5CC00 !important;
 }
 .shm-thumb {
     margin: 2em;
