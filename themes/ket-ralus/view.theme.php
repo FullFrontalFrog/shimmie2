@@ -155,7 +155,7 @@ class CustomViewImageTheme extends ViewImageTheme
         $year_open = "<span style='opacity: 0.3'>";
         $year_close = "</span>";
         $matches = [];
-        if (preg_match("/\(\d{4}\)/", $title, $matches))
+        if (preg_match("/\(\d{4}\+?\)/", $title, $matches))
         {
             $title_year = $matches[0];
             $title = str_replace($title_year, $year_open.$title_year.$year_close, $title);
