@@ -417,12 +417,6 @@ div#front-page {
 	background-size: cover;
 	position: absolute; top: 0; left: 0; height: 100%; width: 100%;
 }
-div#front-page div#links a, div#front-page div#message {
-	background-color: rgb(255, 255, 255);
-	background-color: rgba(255, 255, 255, 0.8);
-	border-radius: 20vmin;
-	-moz-border-radius: 20vmin;
-}
 div#front-page h1 a span {
 	padding: 2vmin;
 	padding-bottom: 1vmin;
@@ -457,6 +451,12 @@ div#front-page div#links a:hover,
 div#front-page div#links a:active {
     color: #41A101;
 }
+div#front-page div#links a, div#front-page div#message {
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 20vmin;
+	-moz-border-radius: 20vmin;
+}
 div#front-page div#message {
 	background: transparent url('bg_fade.png') no-repeat center center;
 	-webkit-background-size: cover;
@@ -465,10 +465,11 @@ div#front-page div#message {
 	background-size: cover;
 	opacity: 0.8;
 	filter: alpha(opacity=80); /* For IE8 and earlier */
-	margin-left: 8px;
-	margin-right: 8px;
+	margin-left: auto;
+	margin-right: auto;
 	margin-bottom: 32px;
 	padding: 8px;
+	width: 300px;
 }
 div#front-page div#message * {
 	color: #000;
