@@ -155,7 +155,7 @@ class CustomViewImageTheme extends ViewImageTheme
 
     private function build_source_header(Image $image): string
     {
-        return "This post has <a href='$image->source'>an alternate version.</a>";
+        return "This post has <a href='$image->source' target='_blank'>an alternate version.</a>";
     }
 
     private function build_title(Image $image): string
