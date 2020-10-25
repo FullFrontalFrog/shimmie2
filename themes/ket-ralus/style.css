@@ -200,6 +200,10 @@ font-size:1em;
 margin:16px;
 text-align:center;
 }
+div#paginator .dots {
+margin:3px;
+padding:4px 6px;
+}
 div#paginator b {
 margin:3px;
 padding:4px 8px;

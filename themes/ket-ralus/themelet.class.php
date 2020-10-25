@@ -29,15 +29,10 @@ class Themelet extends BaseThemelet
 
     private function build_paginator(int $current_page, int $total_pages, string $base_url, ?string $query): string
     {
-        $next = $current_page + 1;
-        $prev = $current_page - 1;
-
         $at_start = ($current_page <= 3 || $total_pages <= 3);
         $at_end = ($current_page >= $total_pages -2);
 
         $first_html  = $at_start ? "" : $this->gen_page_link($base_url, $query, 1, "1");
-        $prev_html   = $at_start ? "" : $this->gen_page_link($base_url, $query, $prev, "&lt;&lt;");
-        $next_html   = $at_end   ? "" : $this->gen_page_link($base_url, $query, $next, "&gt;&gt;");
         $last_html   = $at_end   ? "" : $this->gen_page_link($base_url, $query, $total_pages, "$total_pages");
 
         $start = $current_page-2 > 1 ? $current_page-2 : 1;
@@ -49,18 +44,18 @@ class Themelet extends BaseThemelet
         }
         $pages_html = implode(" ", $pages);
 
-        if (strlen($first_html) > 0) {
-            $pdots = "...";
+        if (strlen($first_html) > 0 && $current_page > 4) {
+            $pdots = "<span class='dots'>...</span>";
         } else {
             $pdots = "";
         }
 
-        if (strlen($last_html) > 0) {
-            $ndots = "...";
+        if (strlen($last_html) > 0 && $current_page < $total_pages - 3) {
+            $ndots = "<span class='dots'>...</span>";
         } else {
             $ndots = "";
         }
 
-        return "<div id='paginator'>$prev_html $first_html $pdots $pages_html $ndots $last_html $next_html</div>";
+        return "<div id='paginator'>$first_html $pdots $pages_html $ndots $last_html</div>";
     }
 }
