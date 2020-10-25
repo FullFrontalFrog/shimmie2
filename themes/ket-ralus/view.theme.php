@@ -12,6 +12,10 @@ class CustomViewImageTheme extends ViewImageTheme
         // related tags
         $page->add_block(new Block("Information", $this->build_information($image), "left", 15));
         $page->add_block(new Block($this->build_artist($image), $this->build_title($image), "main", 0));
+        if (!is_null($image->source))
+        {
+            $page->add_block(new Block("", $this->build_source_header($image), "main", 1));
+        }
         $page->add_block(new Block(null, $this->build_info($image, $editor_parts), "main", 15));
     }
 
@@ -147,6 +151,11 @@ class CustomViewImageTheme extends ViewImageTheme
 		";
 
         return "$h_search";
+    }
+
+    private function build_source_header(Image $image): string
+    {
+        return "This post has <a href='$image->source'>an alternate version.</a>";
     }
 
     private function build_title(Image $image): string
