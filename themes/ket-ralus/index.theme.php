@@ -96,12 +96,12 @@ class CustomIndexTheme extends IndexTheme
             $query = url_escape(implode(' ', $this->search_terms));
             $query_text = urldecode($query);
             $block_title = "Query: $query_text $page_paren";
-            $page->add_block(new Block($block_title, $this->build_table($images, "#search=$query"), "main", 10, "image-list"));
-            $this->display_paginator($page, "post/list/$query", null, $this->page_number, $this->total_pages, true);
+            $page->add_block(new Block(null, $this->build_table($images, "#search=$query"), "main", 10, "image-list"));
+            $this->display_paginator($page, "post/list/$query", null, $this->page_number, $this->total_pages, true, $block_title);
         } else {
             $block_title = "All Posts $page_paren";
-            $page->add_block(new Block($block_title, $this->build_table($images, null), "main", 10, "image-list"));
-            $this->display_paginator($page, "post/list", null, $this->page_number, $this->total_pages, true);
+            $page->add_block(new Block(null, $this->build_table($images, null), "main", 10, "image-list"));
+            $this->display_paginator($page, "post/list", null, $this->page_number, $this->total_pages, true, $block_title);
         }
     }
 }

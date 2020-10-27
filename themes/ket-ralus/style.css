@@ -187,14 +187,16 @@ text-align: left;
 .withleft {
 margin-left:14.5rem;
 }
+
 div#paginator {
 max-width: 888px;
 display:block;
-clear:both;
 padding: 0 0 1em;
 text-align:center;
 font-weight:bold;
-font-size:1em;
+font-size:1.5em;
+margin-top: 1rem;
+padding-top:0.5rem;
 }
 .paginator {
 margin:16px;
@@ -202,25 +204,35 @@ text-align:center;
 }
 div#paginator .dots {
 margin:3px;
-padding:4px 6px;
+padding: 1rem 1rem;
+border:1px solid #d3f7c8;
+}
+div#paginator .space {
+margin:3px;
+padding: 1rem 1.5rem;
+border:1px solid #d3f7c8;
 }
 div#paginator b {
 margin:3px;
-padding:4px 8px;
+padding: 1rem 1.25rem;
+border:1px solid #d3f7c8;
 }
 div#paginator a {
 margin:3px;
-padding:12px 16px;
+padding: 1rem 1.25rem;
+background:#e5ffd4 none repeat scroll 0 0;
 border:1px solid #009933;
+color:#009933;
 }
 div#paginator a:hover {
-border:1px solid white;
-background:#009933 none repeat scroll 0 0;
-color:white;
+background:#fff777 none repeat scroll 0 0;
+border:1px solid #D5CC00;
+color:black;
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 }
+
 span.thumb {
 display:inline-block;
 float:left;
@@ -417,6 +429,22 @@ div#front-page {
 	background-size: cover;
 	position: absolute; top: 0; left: 0; height: 100%; width: 100%;
 }
+div#front-page h1 {
+	height: 3em;
+    line-height: 3em;
+}
+@media screen and (max-width: 768px), (min-width: 768px) and (orientation: portrait) {
+    div#front-page h1 {
+        height: 4em;
+        line-height: 4em;
+    }
+}
+@media screen and (max-height: 768px) and (orientation: landscape) {
+    div#front-page h1 {
+        height: 1em;
+        line-height: 1em;
+    }
+}
 div#front-page h1 a span {
 	padding: 2vmin;
 	padding-bottom: 1vmin;
@@ -495,16 +523,19 @@ div#front-page div#disclaimer ul li.sub {
 	list-style: square outside none;
 }
 div#front-page div#counter {
-    margin-top: 14em;
-    margin-bottom: 0;
+    display: none;
 }
 div#front-page div#foot {
-    margin-top: 0;
-    margin-bottom: 2em;
+    display: none;
 }
 
 @media only screen and (min-width: 1128px) {
   header {
 	background: transparent url('bg_shell.png') no-repeat right top;
   }
+}
+
+section#imagelist
+{
+padding-top:0.5rem;
 }
