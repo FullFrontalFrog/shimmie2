@@ -1,7 +1,7 @@
 <?php
 class Themelet extends BaseThemelet
 {
-    public function display_paginator(Page $page, string $base, ?string $query, int $page_number, int $total_pages, bool $show_random = false, ?string $block_title)
+    public function display_paginator(Page $page, string $base, ?string $query, int $page_number, int $total_pages, bool $show_random = false, ?string $block_title = null)
     {
         if ($total_pages == 0) {
             $total_pages = 1;
