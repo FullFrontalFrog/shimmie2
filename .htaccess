@@ -20,17 +20,17 @@
 	RewriteRule ^_images/([0-9a-f]{2})([0-9a-f]{30}).*$  data/images/$1/$1$2 [L]
 	RewriteRule ^_thumbs/([0-9a-f]{2})([0-9a-f]{30}).*$  data/thumbs/$1/$1$2 [L]
 
-    # KET STUFF
-    
-    # Gallery 1 redirect when nice_urls is Y
-    RewriteCond %{REQUEST_URI} ^/post/view/1?[0-9]{4}$ [NC]
-	RewriteRule (.*) http://ket-ralus.com/gallery/$1 [R=301,L]
-    
-    # Gallery 1 redirect when nice_urls is N
-    RewriteCond %{REQUEST_URI} ^(/post)?/index.php [NC]
-    # I think I need these quotes
-    RewriteCond "%{QUERY_STRING}" "(.*(?:^|&))q=/post/view/(1[0-9]{4})&?(.*)&?$"
-	RewriteRule (.*) http://ket-ralus.com/gallery/post/view/$2 [R=301,L]
+	# KET STUFF
+
+	# # Gallery 1 redirect when nice_urls is Y
+	# RewriteCond %{REQUEST_URI} ^/post/view/1?[0-9]{4}$ [NC]
+	# RewriteRule (.*) http://ket-ralus.com/gallery/$1 [R=301,L]
+
+	# # Gallery 1 redirect when nice_urls is N
+	# RewriteCond %{REQUEST_URI} ^(/post)?/index.php [NC]
+	# # I think I need these quotes
+	# RewriteCond "%{QUERY_STRING}" "(.*(?:^|&))q=/post/view/(1[0-9]{4})&?(.*)&?$"
+	# RewriteRule (.*) http://ket-ralus.com/gallery/post/view/$2 [R=301,L]
 
 	# any requests for files which don't physically exist should be handled by index.php
 	RewriteCond %{REQUEST_FILENAME} !-f

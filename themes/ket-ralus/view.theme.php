@@ -65,7 +65,7 @@ class CustomViewImageTheme extends ViewImageTheme
             $newer_url = $url_base.($image->id + 1);
             $newer = "<a class='newer_enabled' href='$newer_url'>« Newer</a>";
         }
-        if ($image->id > 20000)
+        if ($image->id > 1)
         {
             $older_url = $url_base.($image->id - 1);
             $older = "<a class='older_enabled' href='$older_url'>Older »</a>";
