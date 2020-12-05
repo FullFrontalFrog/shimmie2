@@ -5,19 +5,21 @@ class RatingsInfo extends ExtensionInfo
     public const KEY = "rating";
 
     public $key = self::KEY;
-    public $name = "Image Ratings";
+    public $name = "Image Ratings (Ket Edition)";
     public $url = self::SHIMMIE_URL;
-    public $authors = self::SHISH_AUTHOR;
+    public $authors = self::SHISH_AUTHOR . " & Ket Ralus";
     public $license = self::LICENSE_GPLV2;
-    public $description = "Allow users to rate images \"safe\", \"questionable\" or \"explicit\"";
+    public $description = "Allow users to rate images \"safe\", \"questionable\", \"explicit\", \"unlisted\", or \"private\"";
     public $documentation =
 "This shimmie extension provides filter:
 <ul>
-  <li>rating = (safe|questionable|explicit|unknown)
+  <li>rating = (safe|questionable|explicit|unlisted|private|unknown)
     <ul>
       <li>rating=s -- safe images
       <li>rating=q -- questionable images
       <li>rating=e -- explicit images
+      <li>rating=d -- unlisted images
+      <li>rating=p -- private images
       <li>rating=u -- Unknown rating
       <li>rating=sq -- safe and questionable images
     </ul>

@@ -155,6 +155,12 @@ new UserClass("base", null, [
 
     Permissions::APPROVE_IMAGE => false,
     Permissions::APPROVE_COMMENT => false,
+
+    //KET RALUS CUSTOM begin (hide unlisted images in userclass pt.1)
+
+    Permissions::VIEW_UNLISTED_IMAGES => false,
+
+    //KET RALUS CUSTOM end
 ]);
 
 // Ghost users can't do anything
@@ -241,6 +247,12 @@ new UserClass("admin", "base", [
     Permissions::CRON_ADMIN => true,
     Permissions::APPROVE_IMAGE => true,
     Permissions::APPROVE_COMMENT => true,
+
+    //KET RALUS CUSTOM begin (hide unlisted images in userclass pt.2)
+
+    Permissions::VIEW_UNLISTED_IMAGES => true,
+
+    //KET RALUS CUSTOM end
 ]);
 
 new UserClass("hellbanned", "user", [

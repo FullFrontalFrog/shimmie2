@@ -73,6 +73,8 @@ add_rating(new ImageRating("?", "Unrated", "unrated", 99999));
 add_rating(new ImageRating("s", "Safe", "safe", 0));
 add_rating(new ImageRating("q", "Questionable", "questionable", 500));
 add_rating(new ImageRating("e", "Explicit", "explicit", 1000));
+add_rating(new ImageRating("d", "Unlisted", "unlisted", 1500));
+add_rating(new ImageRating("p", "Private", "private", 2000));
 @include_once "data/config/ratings.conf.php";
 
 class RatingSetEvent extends Event

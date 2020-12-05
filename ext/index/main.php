@@ -37,6 +37,14 @@ class Index extends Extension
             $page_number = $event->get_page_number();
             $page_size = $event->get_page_size();
 
+            //KET RALUS CUSTOM begin (hide unlisted images in index pt.1)
+
+            if (!$user->can(Permissions::VIEW_UNLISTED_IMAGES)) {
+                $search_terms[] = "-rating:d";
+            }
+
+            //KET RALUS CUSTOM end
+
             $count_search_terms = count($search_terms);
 
             try {
@@ -80,6 +88,15 @@ class Index extends Extension
             }
 
             $count_images = count($images);
+
+            //KET RALUS CUSTOM begin (hide unlisted images in index pt.2)
+
+            if (!$user->can(Permissions::VIEW_UNLISTED_IMAGES)) {
+                array_pop($search_terms);
+                --$count_search_terms;
+            }
+
+            //KET RALUS CUSTOM end
 
             if ($count_search_terms === 0 && $count_images === 0 && $page_number === 1) {
                 $this->theme->display_intro($page);

@@ -347,6 +347,25 @@ abstract class DataHandlerExtension extends Extension
 {
     public function onDataUpload(DataUploadEvent $event)
     {
+		//KET RALUS CUSTOM begin
+
+		$is_private = FALSE;
+		$tags = $event->metadata['tags'];
+		if (is_array($tags)) {
+			if (array_search("private", $tags) !== FALSE) {
+				$is_private = TRUE;
+			}
+		} else {
+			if (preg_match("/\bprivate\b/i", $tags)) {
+				$is_private = TRUE;
+			}
+		}
+		if ($is_private) {
+			$event->metadata['rating'] = "p";
+		}
+
+		//KET RALUS CUSTOM end
+
         $supported_ext = $this->supported_ext($event->type);
         $check_contents = $this->check_contents($event->tmpname);
         if ($supported_ext && $check_contents) {
