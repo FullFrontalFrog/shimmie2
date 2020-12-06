@@ -189,7 +189,7 @@ margin-left:14.5rem;
 }
 
 div#paginator {
-max-width: 888px;
+max-width: 740px;
 display:block;
 padding: 0 0 1em;
 text-align:center;
@@ -234,11 +234,19 @@ color:black;
 }
 
 span.thumb {
+background: #e5ffd4 url("canvas.png") no-repeat right bottom;
+background-size: 165px 165px;
+background-clip: content-box;
 display:inline-block;
 float:left;
 width:220px;
 height:220px;
 text-align:center;
+margin-right: 10px;
+margin-bottom: 10px;
+}
+span.thumb:first-of-type {
+text-align:left;
 }
 #pagelist {
 margin-top:32px;
@@ -399,7 +407,7 @@ FOOTER a:link, FOOTER a:visited {
 }
 .shm-image-list {
     margin-top: 2em;
-    max-width: 888px;
+    max-width: 960px;
 }
 .shm-image-list a img {
     border-width: 1px !important;
@@ -410,7 +418,6 @@ FOOTER a:link, FOOTER a:visited {
     border-color: #D5CC00 !important;
 }
 .shm-thumb {
-    margin: 2em;
     line-height: 9em;
 }
 .tagit-label {
