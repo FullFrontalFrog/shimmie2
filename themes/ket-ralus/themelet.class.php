@@ -8,6 +8,7 @@ class Themelet extends BaseThemelet
         }
         $body = $this->build_paginator($page_number, $total_pages, $base, $query);
         $page->add_block(new Block($block_title, $body, "main", 7));
+        $page->add_block(new Block(null, "<div class='ket-paginator-bottom'>".$body."</div>", "main", 13));
     }
 
     private function gen_page_link(string $base_url, ?string $query, string $page, string $name): string

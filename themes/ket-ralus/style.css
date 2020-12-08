@@ -189,14 +189,17 @@ margin-left:14.5rem;
 }
 
 div#paginator {
-max-width: 740px;
+max-width: 750px;
 display:block;
-padding: 0 0 1em;
 text-align:center;
 font-weight:bold;
 font-size:1.5em;
 margin-top: 1rem;
-padding-top:0.5rem;
+padding: 1em 0 1em 0;
+}
+.ket-paginator-bottom {
+clear: left;
+padding: 0.5em 0 0 0;
 }
 .paginator {
 margin:16px;
@@ -234,19 +237,19 @@ color:black;
 }
 
 span.thumb {
-background: #e5ffd4 url("canvas.png") no-repeat right bottom;
-background-size: 165px 165px;
-background-clip: content-box;
+background: #e5ffd4 url("canvas.png") no-repeat center center;
+background-size: 222px 222px;
+background-clip: border-box;
 display:inline-block;
 float:left;
-width:220px;
-height:220px;
+width:222px;
+height:222px;
 text-align:center;
 margin-right: 10px;
 margin-bottom: 10px;
 }
-span.thumb:first-of-type {
-text-align:left;
+span.thumb:hover {
+background: #c5ff9f;
 }
 #pagelist {
 margin-top:32px;
@@ -419,6 +422,11 @@ FOOTER a:link, FOOTER a:visited {
 }
 .shm-thumb {
     line-height: 9em;
+}
+.shm-thumb-link {
+    display: block;
+    height: 222px;
+    width: 222px;
 }
 .tagit-label {
     color: #d3f7c8;
