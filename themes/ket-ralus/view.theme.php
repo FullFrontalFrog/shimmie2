@@ -23,9 +23,15 @@ class CustomViewImageTheme extends ViewImageTheme
     {
         $tags = $image->get_tag_list();
         $matches = [];
-        preg_match_all("/\@\w+/", $tags, $matches);
+        preg_match_all("/\@[\w-]+/", $tags, $matches);
         $artists = $matches[0];
         $artist_count = count($artists);
+        if ($artist_count == 0)
+        {
+            $style = "style='color: black; opacity: 0.3;'";
+            return "<span $style>Artist Unknown</span>";
+        }
+
         $html = "Art By ";
         $twitter = "https://twitter.com/";
         for ($i = 0; $i < $artist_count; $i++)
@@ -49,6 +55,7 @@ class CustomViewImageTheme extends ViewImageTheme
             else
             {
                 $url = str_replace("@", $twitter, $a);
+                $a = str_replace("@", "", $a);
                 $html .= "<a href='$url' target='blank'>$a</a>";
             }
         }
@@ -160,7 +167,10 @@ class CustomViewImageTheme extends ViewImageTheme
 
     private function build_title(Image $image): string
     {
-        $title = $image->title;
+        $title = "";
+        if (Extension::is_enabled(PostTitlesInfo::KEY)) {
+            $title = PostTitles::get_title($image);
+        }
         $year_open = "<span style='opacity: 0.3'>";
         $year_close = "</span>";
         $matches = [];

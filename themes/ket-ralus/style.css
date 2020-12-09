@@ -247,6 +247,7 @@ height:222px;
 text-align:center;
 margin-right: 10px;
 margin-bottom: 10px;
+overflow: auto;
 }
 span.thumb:hover {
 background: #c5ff9f;
