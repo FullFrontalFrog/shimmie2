@@ -40,7 +40,33 @@ class PostTitles extends Extension
         global $config;
 
         if ($config->get_bool(PostTitlesConfig::SHOW_IN_WINDOW_TITLE)) {
-            $event->set_title(self::get_title($event->get_image()));
+            $image = $event->get_image();
+            $title = self::get_title($image);
+
+            $tags = $image->get_tag_list();
+            $matches = [];
+            preg_match_all("/\@\w+/", $tags, $matches);
+            $artists = $matches[0];
+            $artist_count = count($artists);
+            $html = " By ";
+            for ($i = 0; $i < $artist_count; $i++)
+            {
+                $a = $artists[$i];
+                if ($i > 0)
+                {
+                    $html .= ", ";
+                }
+                if ($a == "@KetRalus")
+                {
+                    $html .= "Ket✦Ralus";
+                }
+                else
+                {
+                    $html .= str_replace("@", "", $a);
+                }
+            }
+
+            $event->set_title($title.$html);
         }
     }
 
