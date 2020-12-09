@@ -352,12 +352,15 @@ abstract class DataHandlerExtension extends Extension
 		$is_private = FALSE;
 		$tags = $event->metadata['tags'];
 		if (is_array($tags)) {
-			if (array_search("private", $tags) !== FALSE) {
+            $key = array_search("private", $tags);
+			if ($key !== FALSE) {
 				$is_private = TRUE;
+                unset($event->metadata['tags'][$key]);
 			}
 		} else {
 			if (preg_match("/\bprivate\b/i", $tags)) {
 				$is_private = TRUE;
+                $event->metadata['tags'] = preg_replace("/\bprivate\b/i", " ", $tags);
 			}
 		}
 		if ($is_private) {
