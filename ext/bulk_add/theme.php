@@ -35,7 +35,7 @@ class BulkAddTheme extends Themelet
 
 			<p>".make_form(make_link("bulk_add"))."
 				<table class='form'>
-					<tr><th>Folder</th><td><input type='text' name='dir' size='40'></td></tr>
+					<tr><th>Folder</th><td><input type='text' name='dir' size='40' value='/home/ff-f/sites/gallery2/current/_bulk_add'></td></tr>
 					<tr><td colspan='2'><input type='submit' value='Add'></td></tr>
 				</table>
 			</form>
