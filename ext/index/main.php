@@ -23,6 +23,24 @@ class Index extends Extension
             if (isset($_GET['search'])) {
                 // implode(explode()) to resolve aliases and sanitise
                 $search = url_escape(Tag::implode(Tag::explode($_GET['search'], false)));
+
+                //KET RALUS CUSTOM begin (get category from radio button setting)
+
+				if (isset($_GET['searchType'])) {
+					if ($_GET['searchType'] == 'art') {
+						$search = '!A '.$search;
+					}
+					else if ($_GET['searchType'] == 'ref') {
+						$search = '!R '.$search;
+					}
+					else if ($_GET['searchType'] == 'every') {
+						$search = '!* '.$search;
+					}
+					$search = trim($search);
+				}
+
+                //KET RALUS CUSTOM end
+
                 if (empty($search)) {
                     $page->set_mode(PageMode::REDIRECT);
                     $page->set_redirect(make_link("post/list/1"));

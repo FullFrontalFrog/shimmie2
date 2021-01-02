@@ -148,6 +148,22 @@ class PageRequestEvent extends Event
         if ($this->count_args() === 2) {
             $search_terms = Tag::explode($this->get_arg(0));
         }
+
+		//KET RALUS CUSTOM begin
+
+		$is_cat_set = FALSE;
+		foreach ($search_terms as $key => $value) {
+			if ($value[0] == '!' || ($value[0] == '-' && $value[1] == '!')) {
+				$is_cat_set = TRUE;
+				break;
+			}
+		}
+		if ($is_cat_set === FALSE) {
+			$search_terms[] = '!A';
+		}
+
+		//KET RALUS CUSTOM end
+
         return $search_terms;
     }
 

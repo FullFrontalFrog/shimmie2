@@ -145,6 +145,27 @@ width:100%;
 NAV h3 {
 text-align:left;
 }
+NAV .radio * {
+    vertical-align: middle;
+}
+NAV .radio INPUT {
+	width: auto;
+	margin-left: 0.3em;
+}
+NAV .radio LABEL {
+	color: #009933;
+	cursor: auto;
+	text-decoration: none;
+	margin-left: 0.1em;
+}
+NAV .radio LABEL:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+NAV .radio .go-button {
+    width: 20%;
+	margin-left: 0;
+}
 #comments p {
 overflow:hidden;
 max-width:150px;

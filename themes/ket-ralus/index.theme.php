@@ -27,13 +27,67 @@ class CustomIndexTheme extends IndexTheme
      */
     protected function build_navigation(int $page_number, int $total_pages, array $search_terms): string
     {
+		//KET RALUS CUSTOM begin
+
+		$cat_art = -1;
+		$cat_ref = -1;
+		$cat_every = -1;
+		$cat_other = FALSE;
+		$radio_art = FALSE;
+		$radio_ref = FALSE;
+		$radio_every = FALSE;
+		foreach($search_terms as $key => $value) {
+			if($value[0] == '!') {
+				if(strtoupper($value) == '!A') {
+					$cat_art = $key;
+				}
+				else if(strtoupper($value) == '!R') {
+					$cat_ref = $key;
+				}
+				else if($value == '!*') {
+					$cat_every = $key;
+				}
+				else {
+					$cat_other = TRUE;
+				}
+			}
+			else if($value[0] == '-' && $value[1] == '!')
+			{
+			    $cat_other = TRUE;
+			}
+		}
+		if($cat_other === FALSE) {
+			if($cat_art > -1) {
+				unset($search_terms[$cat_art]);
+				$cat_art = -1;
+				$radio_art = TRUE;
+			}
+			else if($cat_ref > -1) {
+				unset($search_terms[$cat_ref]);
+				$cat_ref = -1;
+				$radio_ref = TRUE;
+			}
+			else if($cat_every > -1) {
+				unset($search_terms[$cat_every]);
+				$cat_every = -1;
+				$radio_every = TRUE;
+			}
+		}
+
+		//KET RALUS CUSTOM end
+
         $h_search_string = count($search_terms) == 0 ? "" : html_escape(implode(" ", $search_terms));
         $h_search_link = make_link();
         $h_search = "
 			<p><form action='$h_search_link' method='GET'>
 				<input name='search' type='text' value='$h_search_string' class='autocomplete_tags' placeholder=''  style='width:75%'/>
-				<input type='submit' value='Go' style='width:20%'>
 				<input type='hidden' name='q' value='/post/list'>
+				<div class='radio'>
+				    <input type='submit' value='Go' class='go-button'>
+					<input type='radio' name='searchType' id='searchTypeArt' value='art'".($radio_art === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'><label for='searchTypeArt'>art</label>
+					<input type='radio' name='searchType' id='searchTypeRef' value='ref'".($radio_ref === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'><label for='searchTypeRef'>ref</label>
+					<input type='radio' name='searchType' id='searchTypeEvery' value='every'".($radio_every === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'><label for='searchTypeEvery'>every</label>
+				</div>
 			</form>
 			<div id='search_completions'></div>";
 
