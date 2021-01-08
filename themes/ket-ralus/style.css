@@ -571,3 +571,12 @@ div#front-page div#foot {
 	background: transparent url('bg_shell.png') no-repeat right top;
   }
 }
+
+.osh-ad img
+{
+    border: 1px solid #009933;
+}
+.osh-ad:hover img
+{
+    border: 1px solid #D5CC00;
+}
