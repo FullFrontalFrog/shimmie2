@@ -27,8 +27,6 @@ class CustomIndexTheme extends IndexTheme
      */
     protected function build_navigation(int $page_number, int $total_pages, array $search_terms): string
     {
-		//KET RALUS CUSTOM begin
-
 		$cat_art = -1;
 		$cat_ref = -1;
 		$cat_every = -1;
@@ -74,7 +72,19 @@ class CustomIndexTheme extends IndexTheme
 			}
 		}
 
-		//KET RALUS CUSTOM end
+        global $user, $user_config;
+        if ($user->id > 1) // if logged in
+        {
+            $unlisted_val = 'd';
+            $ratings = $user_config->get_array(RatingsConfig::USER_DEFAULTS);
+            $show_unlisted = in_array($unlisted_val, $ratings);
+            // NOTE: the hidden control below ensures unlistedChk is set for evaluation in ext/index/main.php
+            $user_options = "<div class='check'>
+                <input type='hidden' name='unlistedChk' id='unlistedChkControl' value='control' checked='checked'>
+                <input type='checkbox' name='unlistedChk' id='unlistedChkVisible' value='visible'".($show_unlisted === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'>
+                <label for='unlistedChkVisible'>Show Unlisted Images</label>
+            </div>";
+        }
 
         $h_search_string = count($search_terms) == 0 ? "" : html_escape(implode(" ", $search_terms));
         $h_search_link = make_link();
@@ -87,6 +97,7 @@ class CustomIndexTheme extends IndexTheme
 					<input type='radio' name='searchType' id='searchTypeArt' value='art'".($radio_art === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'><label for='searchTypeArt'>art</label>
 					<input type='radio' name='searchType' id='searchTypeRef' value='ref'".($radio_ref === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'><label for='searchTypeRef'>ref</label>
 					<input type='radio' name='searchType' id='searchTypeEvery' value='every'".($radio_every === TRUE ? " checked='checked'" : "")." onClick='this.form.submit();'><label for='searchTypeEvery'>every</label>
+					".$user_options."
 				</div>
 			</form>
 			<div id='search_completions'></div>";

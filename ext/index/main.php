@@ -20,6 +20,33 @@ class Index extends Extension
     {
         global $cache, $page, $user;
         if ($event->page_matches("post/list")) {
+
+            //KET RALUS CUSTOM begin (set user options)
+
+            global $user, $user_config;
+            if ($user->id > 1 && isset($_GET['unlistedChk'])) {
+                $unlisted_val = 'd';
+                $ratings = $user_config->get_array(RatingsConfig::USER_DEFAULTS);
+                if ($_GET['unlistedChk'] == 'visible') {
+                    if (!in_array($unlisted_val, $ratings)) {
+                        $ratings[] = $unlisted_val;
+                    }
+                }
+                else {
+                    if (($unlisted_key = array_search($unlisted_val, $ratings)) !== false) {
+                        unset($ratings[$unlisted_key]);
+                    }
+                }
+                $user_config->set_array(RatingsConfig::USER_DEFAULTS, $ratings);
+                if (!isset($_GET['search'])) {
+                    $page->set_mode(PageMode::REDIRECT);
+                    $page->set_redirect(make_link("post/list/1"));
+                    return;
+                }
+            }
+
+            //KET RALUS CUSTOM end
+
             if (isset($_GET['search'])) {
                 // implode(explode()) to resolve aliases and sanitise
                 $search = url_escape(Tag::implode(Tag::explode($_GET['search'], false)));
