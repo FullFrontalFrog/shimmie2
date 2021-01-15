@@ -32,15 +32,6 @@ class RandomList extends Extension
             $images_per_page = $config->get_int("random_images_list_count", 12);
             $random_images = [];
 
-            //KET RALUS CUSTOM begin (hide unlisted images in shuffle pt.1)
-
-            global $user;
-            if (!$user->can(Permissions::VIEW_UNLISTED_IMAGES)) {
-                $search_terms[] = "-rating:d";
-            }
-
-            //KET RALUS CUSTOM end
-
             // generate random images
             for ($i = 0; $i < $images_per_page; $i++) {
                 $random_image = Image::by_random($search_terms);
@@ -49,14 +40,6 @@ class RandomList extends Extension
                 }
                 array_push($random_images, $random_image);
             }
-
-            //KET RALUS CUSTOM begin (hide unlisted images in shuffle pt.2)
-
-            if (!$user->can(Permissions::VIEW_UNLISTED_IMAGES)) {
-                array_pop($search_terms);
-            }
-
-            //KET RALUS CUSTOM end
 
             $this->theme->set_page($search_terms);
             $this->theme->display_page($page, $random_images);

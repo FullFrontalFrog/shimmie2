@@ -11,7 +11,4 @@ new UserClass("user", "user", [
 	Permissions::MASS_TAG_EDIT => False,
 	Permissions::EDIT_TAG_CATEGORIES => False,
 ]);
-new UserClass("trusted", "user", [
-	Permissions::VIEW_UNLISTED_IMAGES => True,
-]);
 ?>
