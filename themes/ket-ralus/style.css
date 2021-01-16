@@ -442,13 +442,13 @@ FOOTER a:link, FOOTER a:visited {
     font-weight: bold;
 }
 .shm-thumb-has_child img {
-    border-color: lime !important;
+    border-color: #C42126 !important;
 }
 .shm-thumb-has_parent img {
-    border-color: #0c0 !important;
+    border-color: #7289DA !important;
 }
 .shm-thumb-has_child.shm-thumb-has_parent img {
-    border-color: lime #0c0 #0c0 lime !important;
+    border-color: #C42126 #7289DA #7289DA #C42126 !important;
 }
 .shm-image-list {
     margin-top: 2em;

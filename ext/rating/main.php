@@ -251,6 +251,20 @@ class Ratings extends Extension
     {
         global $user;
 
+        //KET RALUS CUSTOM begin (always show unlisted images in child posts)
+
+        if ($this->no_rating_query($event->context)) {
+            foreach ($event->context as $term) {
+                if (preg_match("/^parent[=|:]/", $term)) {
+                    $set = Ratings::privs_to_sql(Ratings::get_user_class_privs($user));
+                    $event->add_querylet(new Querylet("rating IN ($set)"));
+                    return;
+                }
+            }
+        }
+
+        //KET RALUS CUSTOM end
+
         $matches = [];
         if (is_null($event->term) && $this->no_rating_query($event->context)) {
             $set = Ratings::privs_to_sql(Ratings::get_user_default_ratings($user));
