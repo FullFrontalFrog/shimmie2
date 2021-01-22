@@ -450,23 +450,22 @@ FOOTER a:link, FOOTER a:visited {
 .shm-thumb-has_child.shm-thumb-has_parent img {
     border-color: #C42126 #7289DA #7289DA #C42126 !important;
 }
-.shm-image-list {
-    margin-top: 2em;
+.blockbody {
     max-width: 960px;
 }
-.shm-image-list a img {
+.blockbody a img {
     border-width: 1px !important;
     border-style: solid;
     border-color: #009933;
 }
-.shm-image-list a:hover img {
+.blockbody a:hover img {
     border-color: #D5CC00 !important;
 }
 .shm-thumb {
     line-height: 9em;
 }
 .shm-thumb-link {
-    display: block;
+    display: inline-block;
     height: 222px;
     width: 222px;
 }
