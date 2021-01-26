@@ -469,6 +469,9 @@ FOOTER a:link, FOOTER a:visited {
     height: 222px;
     width: 222px;
 }
+.shm-image-list .shm-thumb-link {
+    display: block;
+}
 .tagit-label {
     color: #d3f7c8;
     font-weight: bold;
