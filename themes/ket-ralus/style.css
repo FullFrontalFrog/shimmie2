@@ -1,4 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap');
+
+/* ----- */
+/* LINKS */
+/* ===== */
+
+a {
+    text-decoration:none;
+}
+a:link, a:visited {
+    color:#009933; /* LINK GREEN */
+    text-decoration:none;
+}
+a:hover {
+    color:#D5CC00; /* HOVER GOLD */
+    text-decoration:none;
+}
+a:active {
+    color:#D5CC33;
+    text-decoration:none;
+}
+HEADER ul#navbar li a {
+    display:inline-block;
+    margin:0 0.15rem;
+    padding:0.4rem 0.6rem;
+}
+HEADER ul#navbar li:first-child a {
+    margin-left: -0.6rem;
+    color: #C42126;
+    font-weight: bold;
+}
+HEADER ul#navbar li a.current-page {
+    background-color:#d3f7c8;
+    border-radius:0.2rem 0.2rem 0 0;
+    font-weight:bold;
+}
+h1 a {
+    color:black;
+}
+div#paginator a {
+    margin:3px;
+    padding: 1rem 1.25rem;
+    background:#e5ffd4 none repeat scroll 0 0;
+    border:1px solid #009933; /* LINK GREEN */
+    color:#009933; /* LINK GREEN */
+}
+div#paginator a:hover {
+    background:#fff777 none repeat scroll 0 0;
+    border:1px solid #D5CC00;
+    color:black;
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+}
+ul.flat-list li a {
+    font-weight:normal;
+}
+div#front-page h1 a {
+	font-size: 7vmin;
+}
+div#front-page h1 a:link,
+div#front-page h1 a:visited {
+	color: #C42126;
+}
+div#front-page h1 a:hover,
+div#front-page h1 a:active {
+    color: #41A101;
+}
+div#front-page h1 a span {
+	padding: 2vmin;
+	padding-bottom: 1vmin;
+}
+div#front-page div#links a {
+	padding: 5px;
+	line-height: 2em;
+}
+div#front-page div#links a:link,
+div#front-page div#links a:visited {
+	color: #C42126;
+}
+div#front-page div#links a:hover,
+div#front-page div#links a:active {
+    color: #41A101;
+}
+div#front-page div#message a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+a.lesser {
+    color:#7FCC33; /* LESSER LINK GREEN */
+}
+a.lesser:hover {
+    color:#D5CC00; /* LESSER HOVER GOLD */
+}
+FOOTER a:link, FOOTER a:visited {
+    color: #77cc99;
+}
+
+/* end links */
+
+/* -------- */
+/* ALL ELSE */
+/* -------- */
+
 .noleft{
 padding-left:2rem;
 }
@@ -18,21 +121,6 @@ padding:0 1rem 0 2rem;
 }
 HEADER ul#navbar li {
 margin:0;
-}
-HEADER ul#navbar li a {
-display:inline-block;
-margin:0 0.15rem;
-padding:0.4rem 0.6rem;
-}
-HEADER ul#navbar li:first-child a {
-margin-left: -0.6rem;
-color: #C42126;
-font-weight: bold;
-}
-HEADER ul#navbar li a.current-page {
-background-color:#d3f7c8;
-border-radius:0.2rem 0.2rem 0 0;
-font-weight:bold;
 }
 HEADER ul#subnavbar {
 margin:0 0 0.5rem;
@@ -63,9 +151,6 @@ margin-top:0;
 margin-bottom:0;
 padding:0.3rem;
 font-size:2.2rem;
-}
-h1 a {
-color:black;
 }
 h3 {
 margin-top:0;
@@ -112,12 +197,6 @@ margin: 1rem 2rem;
 }
 form {
 margin:0;
-}
-a {
-text-decoration:none;
-}
-a:hover {
-text-decoration:underline;
 }
 NAV {
 float:left;
@@ -261,21 +340,6 @@ margin:3px;
 padding: 1rem 1.25rem;
 border:1px solid #d3f7c8;
 }
-div#paginator a {
-margin:3px;
-padding: 1rem 1.25rem;
-background:#e5ffd4 none repeat scroll 0 0;
-border:1px solid #009933;
-color:#009933;
-}
-div#paginator a:hover {
-background:#fff777 none repeat scroll 0 0;
-border:1px solid #D5CC00;
-color:black;
--moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
-}
 
 span.thumb {
 background: #e5ffd4 url("canvas.png") no-repeat center center;
@@ -362,22 +426,6 @@ margin:0;
 padding:0;
 font-family: 'Manrope', sans-serif;
 }
-a:link {
-color:#009933;
-text-decoration:none;
-}
-a:visited {
-color:#009933;
-text-decoration:none;
-}
-a:hover {
-color:#D5CC00;
-text-decoration:none;
-}
-a:active {
-color:#009933;
-text-decoration:none;
-}
 ul.flat-list {
 display:block;
 margin:0;
@@ -392,9 +440,6 @@ margin:0 1.3em 0 0;
 list-style-type:none;
 text-align:left;
 font-weight:bold;
-}
-ul.flat-list li a {
-font-weight:normal;
 }
 #tips {
 margin-left:16px;
@@ -434,9 +479,6 @@ display:none;
 
 /* CUSTOM */
 
-FOOTER a:link, FOOTER a:visited {
-    color: #77cc99;
-}
 .post_title .view {
     font-size: 1.1rem;
     font-weight: bold;
@@ -504,39 +546,12 @@ div#front-page h1 {
         line-height: 1em;
     }
 }
-div#front-page h1 a span {
-	padding: 2vmin;
-	padding-bottom: 1vmin;
-}
-div#front-page h1 a {
-	font-size: 7vmin;
-}
-div#front-page h1 a:link,
-div#front-page h1 a:visited {
-	color: #C42126;
-}
-div#front-page h1 a:hover,
-div#front-page h1 a:active {
-    color: #41A101;
-}
 div#front-page h1 {
 	margin-top: 0 !important;
 	padding-bottom: 6vmin;
 }
 div#front-page div#links {
 	margin-top: 30vmin;
-}
-div#front-page div#links a {
-	padding: 5px;
-	line-height: 2em;
-}
-div#front-page div#links a:link,
-div#front-page div#links a:visited {
-	color: #C42126;
-}
-div#front-page div#links a:hover,
-div#front-page div#links a:active {
-    color: #41A101;
 }
 div#front-page div#links a, div#front-page div#message {
 	background-color: rgb(255, 255, 255);
@@ -560,10 +575,6 @@ div#front-page div#message {
 }
 div#front-page div#message * {
 	color: #000;
-}
-div#front-page div#message a {
-	font-weight: bold;
-	text-decoration: underline;
 }
 div#front-page div#disclaimer {
 	margin-left: auto;
@@ -601,4 +612,9 @@ div#front-page div#foot {
 .osh-ad:hover img
 {
     border: 1px solid #D5CC00;
+}
+
+span.lesser
+{
+    opacity: 0.3; /* LESSER OPACITY */
 }

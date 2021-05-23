@@ -85,13 +85,61 @@ class CustomViewImageTheme extends ViewImageTheme
     private function build_image_tags(Image $image): string
     {
         $tag_links = [];
-        foreach ($image->get_tag_array() as $tag) {
-            $h_tag = html_escape($tag);
-            $u_tag = url_escape($tag);
-            $h_link = make_link("post/list/$u_tag/1");
-            $tag_links[] = "<a href='$h_link'>$h_tag</a><br />";
+        $head_active = false;
+        $head_category = false;
+        $head_artist = false;
+        $head_tag = false;
+        foreach ($image->get_tag_array() as $tag)
+        {
+            $type = "";
+            $h_type = "";
+            if (substr($tag, 0, 1) === "!")
+            {
+                $type = "Category:";
+                if ($head_category == false)
+                {
+                    $head_category = true;
+                    $head_active = true;
+                }
+            }
+            else if (substr($tag, 0, 1) === "@")
+            {
+                $type = "Artist:";
+                if ($head_artist == false)
+                {
+                    $head_artist = true;
+                    $head_active = true;
+                }
+            }
+            else
+            {
+                $type = "Tag:";
+                if ($head_tag == false)
+                {
+                    $head_tag = true;
+                    $head_active = true;
+                }
+            }
+            if ($head_active == true)
+            {
+                $head_active = false;
+                $h_type = "<span>$type</span><br />";
+            }
+            $u_tag_a = url_escape("!A " . $tag);
+            $h_link_a = make_link("post/list/$u_tag_a/1");
+            $u_tag_r = url_escape("!R " . $tag);
+            $h_link_r = make_link("post/list/$u_tag_r/1");
+            $u_tag_e = url_escape("!* " . $tag);
+            $h_link_e = make_link("post/list/$u_tag_e/1");
+            $h_tag_e = html_escape(str_replace("_", " ", $tag));
+            $l_class = "class='lesser'";
+            $g_style = "style='font-weight: bold;'";
+            $tag_links[] = $h_type .
+                "<a $l_class href='$h_link_a'>art</a> " .
+                "<a $l_class href='$h_link_r'>ref</a> " .
+                "<a $g_style href='$h_link_e'>$h_tag_e</a><br />";
         }
-        $h_tag_links = Tag::implode($tag_links);
+        $h_tag_links = implode($tag_links);
 
         return "<span class='view'>$h_tag_links</span>";
     }
