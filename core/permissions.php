@@ -31,6 +31,7 @@ abstract class Permissions
     public const EDIT_IMAGE_OWNER = "edit_image_owner";
     public const EDIT_IMAGE_LOCK = "edit_image_lock";
     public const EDIT_IMAGE_TITLE = "edit_image_title";
+    public const EDIT_IMAGE_FILENAME = "edit_image_filename";
     public const BULK_EDIT_IMAGE_TAG = "bulk_edit_image_tag";
     public const BULK_EDIT_IMAGE_SOURCE = "bulk_edit_image_source";
     public const DELETE_IMAGE = "delete_image";
