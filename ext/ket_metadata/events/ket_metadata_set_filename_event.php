@@ -1,6 +1,6 @@
 <?php
 
-class KetMetadataSetEvent extends Event
+class KetMetadataSetFilenameEvent extends Event
 {
     public $image;
     public $filename;

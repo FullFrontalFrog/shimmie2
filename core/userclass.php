@@ -101,7 +101,6 @@ new UserClass("base", null, [
     Permissions::EDIT_IMAGE_OWNER => false,
     Permissions::EDIT_IMAGE_LOCK => false,
     Permissions::EDIT_IMAGE_TITLE => false,
-    Permissions::EDIT_IMAGE_FILENAME => false,
     Permissions::BULK_EDIT_IMAGE_TAG => false,
     Permissions::BULK_EDIT_IMAGE_SOURCE => false,
     Permissions::DELETE_IMAGE => false,
@@ -156,6 +155,11 @@ new UserClass("base", null, [
 
     Permissions::APPROVE_IMAGE => false,
     Permissions::APPROVE_COMMENT => false,
+
+    Permissions::VIEW_IMAGE_DATE_POSTED => false, # Ket Metadata Permissions
+    Permissions::EDIT_IMAGE_DATE_POSTED => false,
+    Permissions::VIEW_IMAGE_FILENAME => false,
+    Permissions::EDIT_IMAGE_FILENAME => false,
 ]);
 
 // Ghost users can't do anything
@@ -175,10 +179,8 @@ new UserClass("user", "base", [
     Permissions::EDIT_IMAGE_TAG => true,
     Permissions::EDIT_IMAGE_SOURCE => true,
     Permissions::EDIT_IMAGE_TITLE => true,
-    Permissions::EDIT_IMAGE_FILENAME => true,
     Permissions::CREATE_IMAGE_REPORT => true,
     Permissions::EDIT_IMAGE_RATING => true,
-
 ]);
 
 new UserClass("admin", "base", [
@@ -206,7 +208,6 @@ new UserClass("admin", "base", [
     Permissions::EDIT_IMAGE_SOURCE => true,
     Permissions::EDIT_IMAGE_OWNER => true,
     Permissions::EDIT_IMAGE_TITLE => true,
-    Permissions::EDIT_IMAGE_FILENAME => true,
     Permissions::BULK_EDIT_IMAGE_TAG => true,
     Permissions::BULK_EDIT_IMAGE_SOURCE => true,
     Permissions::MASS_TAG_EDIT => true,
@@ -244,6 +245,11 @@ new UserClass("admin", "base", [
     Permissions::CRON_ADMIN => true,
     Permissions::APPROVE_IMAGE => true,
     Permissions::APPROVE_COMMENT => true,
+
+    Permissions::VIEW_IMAGE_DATE_POSTED => true, # Ket Metadata Permissions
+    Permissions::EDIT_IMAGE_DATE_POSTED => true,
+    Permissions::VIEW_IMAGE_FILENAME => true,
+    Permissions::EDIT_IMAGE_FILENAME => true,
 ]);
 
 new UserClass("hellbanned", "user", [
