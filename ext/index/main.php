@@ -24,9 +24,9 @@ class Index extends Extension
             //KET RALUS CUSTOM begin (set user options)
 
             global $user, $user_config;
+            $unlisted_val = 'd';
+            $ratings = $user_config->get_array(RatingsConfig::USER_DEFAULTS);
             if ($user->id > 1 && isset($_GET['unlistedChk'])) {
-                $unlisted_val = 'd';
-                $ratings = $user_config->get_array(RatingsConfig::USER_DEFAULTS);
                 if ($_GET['unlistedChk'] == 'visible') {
                     if (!in_array($unlisted_val, $ratings)) {
                         $ratings[] = $unlisted_val;
@@ -85,8 +85,17 @@ class Index extends Extension
             $count_search_terms = count($search_terms);
 
             try {
+                //KET RALUS CUSTOM begin (inject user ratings into search terms for counting pages)
+
+                $search_terms_for_pages = $search_terms;
+                if (!in_array($unlisted_val, $ratings)) {
+                    $search_terms_for_pages[] = "-rating:d";
+                }
+
+                //KET RALUS CUSTOM end
+
                 #log_debug("index", "Search for ".Tag::implode($search_terms), false, array("terms"=>$search_terms));
-                $total_pages = Image::count_pages($search_terms);
+                $total_pages = Image::count_pages($search_terms_for_pages); //KR
                 $images = [];
 
                 if (SPEED_HAX) {
