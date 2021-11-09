@@ -32,10 +32,10 @@ class CustomViewImageTheme extends ViewImageTheme
             return "<span $style>Artist Unknown</span>";
         }
 
-        $html = "Art By ";
-        $twitter = "https://twitter.com/";
+        $html = "Art by ";
         for ($i = 0; $i < $artist_count; $i++)
         {
+            $url = "";
             $a = $artists[$i];
             if ($i > 0)
             {
@@ -43,23 +43,35 @@ class CustomViewImageTheme extends ViewImageTheme
             }
             if ($a == "@KetRalus")
             {
-                $html .= "Ket✦Ralus";
-                if ($artist_count == 1)
-                {
-                    $url = str_replace("@", $twitter, $a);
-                    $href = "href='$url' target='blank'";
-                    $style = "style='color: black; opacity: 0.3;'";
-                    $html .= " <a $href $style>(@KetRalus)</a>";
-                }
+                $url = "https://twitter.com/KetRalus";
+                $a = "Ket Ralus";
             }
             else
             {
-                $url = str_replace("@", $twitter, $a);
+                $url = $this->build_artist_link($a);
                 $a = str_replace("@", "", $a);
-                $html .= "<a href='$url' target='blank'>$a</a>";
             }
+            $html .= "<a href='$url' target='blank'>$a</a>";
         }
         return $html;
+    }
+
+    private function build_artist_link(string $artist): string
+    {
+        /*
+            Table creation code:
+            CREATE TABLE `gallery2`.`artist_links` ( `artist_tag_id` INT(11) NOT NULL , `link` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
+            ALTER TABLE `artist_links` CHANGE `link` `link` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+            ALTER TABLE `gallery2`.`artist_links` ADD UNIQUE `artist_tag_id_idx` (`artist_tag_id`);
+        */
+        global $database;
+        $result = $database->get_row("SELECT link FROM artist_links al JOIN tags t ON al.artist_tag_id = t.id WHERE t.tag LIKE :artist", ['artist'=>$artist]);
+        if ($result['link'] != null)
+        {
+            return $result['link'];
+        }
+        $twitter = "https://twitter.com/";
+        return str_replace("@", $twitter, $artist);
     }
 
     private function build_image_nav_block(Image $image): string
