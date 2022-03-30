@@ -52,7 +52,7 @@ class PostTitles extends Extension
             $artist_count = count($artists);
             if ($artist_count != 0)
             {
-                $artist_text = " By ";
+                $artist_text = " by ";
                 for ($i = 0; $i < $artist_count; $i++)
                 {
                     $a = $artists[$i];
@@ -62,7 +62,7 @@ class PostTitles extends Extension
                     }
                     if ($a == "@KetRalus")
                     {
-                        $artist_text .= "Ket✦Ralus";
+                        $artist_text .= "Ket Ralus";
                     }
                     else
                     {
