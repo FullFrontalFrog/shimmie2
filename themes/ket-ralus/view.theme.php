@@ -11,7 +11,7 @@ class CustomViewImageTheme extends ViewImageTheme
         $page->add_block(new Block("Image Tags", $this->build_image_tags($image), "left", 2));
         // related tags
         $page->add_block(new Block("Information", $this->build_information($image), "left", 15));
-        $page->add_block(new Block($this->build_artist($image), $this->build_title($image), "main", 0));
+        $page->add_block(new Block($this->build_artist_and_rating($image), $this->build_title($image), "main", 0));
         if (!is_null($image->source))
         {
             $page->add_block(new Block("", $this->build_source_header($image), "main", 1));
@@ -19,8 +19,14 @@ class CustomViewImageTheme extends ViewImageTheme
         $page->add_block(new Block(null, $this->build_info($image, $editor_parts), "main", 15));
     }
 
-    private function build_artist(Image $image): string
+    private function build_artist_and_rating(Image $image): string
     {
+        $html = "";
+        $spaces .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+        $style_gray = "style='color: #AAA;'";
+        $style_gray_on_white = "style='color: #AAA; background-color: white;'";
+        $style_white_on_red = "style='color: white; background-color: red;'";
+
         $tags = $image->get_tag_list();
         $matches = [];
         preg_match_all("/\@[\w-]+/", $tags, $matches);
@@ -28,31 +34,43 @@ class CustomViewImageTheme extends ViewImageTheme
         $artist_count = count($artists);
         if ($artist_count == 0)
         {
-            $style = "style='color: black; opacity: 0.3;'";
-            return "<span $style>Artist Unknown</span>";
+            $html = "<span $style_gray>Artist Unknown</span>";
+        }
+        else
+        {
+            $html = "Art by ";
+            for ($i = 0; $i < $artist_count; $i++)
+            {
+                $url = "";
+                $a = $artists[$i];
+                if ($i > 0)
+                {
+                    $html .= ", ";
+                }
+                if ($a == "@KetRalus")
+                {
+                    $url = "https://twitter.com/KetRalus";
+                    $a = "Ket Ralus";
+                }
+                else
+                {
+                    $url = $this->build_artist_link($a);
+                    $a = str_replace("@", "", $a);
+                }
+                $html .= "<a href='$url' target='blank'>$a</a>";
+            }
         }
 
-        $html = "Art by ";
-        for ($i = 0; $i < $artist_count; $i++)
+        $rating = $image->rating;
+        if ($rating == "d")
         {
-            $url = "";
-            $a = $artists[$i];
-            if ($i > 0)
-            {
-                $html .= ", ";
-            }
-            if ($a == "@KetRalus")
-            {
-                $url = "https://twitter.com/KetRalus";
-                $a = "Ket Ralus";
-            }
-            else
-            {
-                $url = $this->build_artist_link($a);
-                $a = str_replace("@", "", $a);
-            }
-            $html .= "<a href='$url' target='blank'>$a</a>";
+            $html .= "$spaces<span $style_gray_on_white>&nbsp;unlisted&nbsp;</span>";
         }
+        else if ($rating == "p")
+        {
+            $html .= "$spaces<span $style_white_on_red>&nbsp;PRIVATE&nbsp;</span>";
+        }
+
         return $html;
     }
 
