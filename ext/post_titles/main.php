@@ -66,7 +66,7 @@ class PostTitles extends Extension
                     }
                     else
                     {
-                        $artist_text .= str_replace("@", "", $a);
+                        $artist_text .= str_replace(["@", "_"], ["", " "], $a);
                     }
                 }
             }

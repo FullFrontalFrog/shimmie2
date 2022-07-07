@@ -55,7 +55,7 @@ class CustomViewImageTheme extends ViewImageTheme
                 else
                 {
                     $url = $this->build_artist_link($a);
-                    $a = str_replace("@", "", $a);
+                    $a = str_replace(["@", "_"], ["", " "], $a);
                 }
                 $html .= "<a href='$url' target='blank'>$a</a>";
             }
