@@ -24,7 +24,7 @@ class CustomUserPageTheme extends UserPageTheme
 			</form>
 		";
         if ($config->get_bool("login_signup_enabled")) {
-            $html .= "<small><a href='".make_link("user_admin/create")."'>Create Account</a></small>";
+            $html .= "<p id='createaccount'><a href='".make_link("user_admin/create")."'>Create Account</a></p>";
         }
         $page->add_block(new Block("Login", $html, "main", 90));
     }

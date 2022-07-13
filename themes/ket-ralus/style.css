@@ -518,6 +518,11 @@ display:none;
     color: #d3f7c8; /* green 2 */
     font-weight: bold;
 }
+#createaccount {
+	margin-top: 1rem;
+	font-size: 1rem;
+	font-weight: bold;
+}
 #Importmain span.thumb,
 #Editing_Postsmain span.thumb,
 #Sorting_Postsmain span.thumb {
