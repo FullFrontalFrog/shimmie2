@@ -23,9 +23,13 @@ class CustomUserPageTheme extends UserPageTheme
 				</table>
 			</form>
 		";
+		// temporarily remove this until I figure out how to fix self-serve user creation
+		/*
         if ($config->get_bool("login_signup_enabled")) {
-            $html .= "<p id='createaccount'><a href='".make_link("user_admin/create")."'>Create Account</a></p>";
+            $html .= "<p id='createaccount'><a href='".make_link("user_admin/create")."'>Create Account</a> - create a user account on gallery2</p>";
         }
+        */
+        $html .= "<p id='createaccount'><a href='https://forms.gle/no9eNH9rauxnJyEP8'>Create Account</a> - create a user account on gallery2</p>";
         $page->add_block(new Block("Login", $html, "main", 90));
     }
 

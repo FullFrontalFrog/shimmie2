@@ -521,6 +521,8 @@ display:none;
 #createaccount {
 	margin-top: 1rem;
 	font-size: 1rem;
+}
+#createaccount a {
 	font-weight: bold;
 }
 #Importmain span.thumb,
