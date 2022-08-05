@@ -63,7 +63,7 @@ class CustomUserPageTheme extends UserPageTheme
         $tfe = new TextFormattingEvent($tac);
         send_event($tfe);
         $tac = $tfe->formatted;
-        
+
         $reca = "<tr><td colspan='2'>".captcha_get_html()."</td></tr>";
 
         if (empty($tac)) {
