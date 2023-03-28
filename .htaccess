@@ -35,7 +35,7 @@
 	# any requests for files which don't physically exist should be handled by index.php
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^/data/ex/
-	RewriteRule ^(.*)$ index.php?q=$1&%{QUERY_STRING} [L]
+	RewriteRule ^(.*)$ index.php?q=$1&%{QUERY_STRING} [B,L]
 </IfModule>
 
 <IfModule mod_expires.c>

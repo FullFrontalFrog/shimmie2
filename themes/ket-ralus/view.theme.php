@@ -22,7 +22,7 @@ class CustomViewImageTheme extends ViewImageTheme
     private function build_artist_and_rating(Image $image): string
     {
         $html = "";
-        $spaces .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+        $spaces = "&nbsp;&nbsp;&nbsp;&nbsp;";
         $style_gray = "style='color: #AAA;'";
         $style_gray_on_white = "style='color: #AAA; background-color: white;'";
         $style_white_on_red = "style='color: white; background-color: red;'";
