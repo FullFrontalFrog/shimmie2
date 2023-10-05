@@ -71,6 +71,16 @@ class BaseThemelet
             }
         }
 
+        $rating = $image->rating;
+        if ($rating == "d")
+        {
+            $custom_classes .= "shm-thumb-is_unlisted ";
+        }
+        else if ($rating == "p")
+        {
+            $custom_classes .= "shm-thumb-is_private ";
+        }
+
         return "<a href='$h_view_link' class='thumb shm-thumb shm-thumb-link {$custom_classes}' data-tags='$h_tags' data-post-id='$i_id'>".
                 "<img id='thumb_$i_id' title='$h_tip' alt='$h_tip' height='{$tsize[1]}' width='{$tsize[0]}' src='$h_thumb_link'>".
                 "</a>\n";

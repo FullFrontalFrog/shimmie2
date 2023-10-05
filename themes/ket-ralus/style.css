@@ -492,6 +492,12 @@ display:none;
 .shm-thumb-has_child.shm-thumb-has_parent img {
     border-color: #c5ff9f !important; /* green 3 */
 }
+.shm-thumb-is_unlisted img {
+    border-color: #AAA !important;
+}
+.shm-thumb-is_private img {
+    border-color: red !important;
+}
 .blockbody {
     max-width: 960px;
 }
