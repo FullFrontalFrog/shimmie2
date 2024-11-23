@@ -6,23 +6,35 @@ class RelationshipsTheme extends Themelet
     {
         global $page, $database;
 
+        $string_output = "";
+        $string_style = "strong";
+
+        if (!is_null($image->source)) {
+            $source_type = "EX FILE";
+            if (strpos($image->source, '_hq.') !== false) {
+                $source_type = "High Quality Ver.";
+            }
+            $string_output .= " <a href='$image->source' target='_blank'>$source_type</a>";
+        }
+
         if ($image->parent_id !== null) {
-            $a = "<a href='".make_link("post/view/".$image->parent_id)."'>parent post</a>";
-            $page->add_block(new Block(null, "This post belongs to a $a.", "main", 5));
+            $string_output .= " ↓<a href='".make_link("post/view/".$image->parent_id)."'>$image->parent_id</a>";
         }
 
         if (bool_escape($image->has_children)) {
             $ids = $database->get_col("SELECT id FROM images WHERE parent_id = :iid", ["iid"=>$image->id]);
 
-            $html = "This post has <a href='".make_link('post/list/parent='.$image->id.'/1')."'>".(count($ids) > 1 ? "child posts" : "a child post")."</a>";
-            $html .= " (post ";
             foreach ($ids as $id) {
-                $html .= "#<a href='".make_link('post/view/'.$id)."'>{$id}</a>, ";
+                $string_output .= " ↑<a href='".make_link('post/view/'.$id)."'>{$id}</a>";
             }
-            $html = rtrim($html, ", ").").";
-
-            $page->add_block(new Block(null, $html, "main", 6));
         }
+
+        if ($string_output == "") {
+            $string_output = " NONE";
+            $string_style = "em";
+        }
+
+        $page->add_block(new Block(null, "<span style='color: #999999;'>>> RELATED IMAGES:</span><$string_style>$string_output</$string_style>", "main", 5));
     }
 
     public function get_parent_editor_html(Image $image): string
