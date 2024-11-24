@@ -501,6 +501,14 @@ display:none;
 .blockbody {
     max-width: 960px;
 }
+#imagelist .blockbody {
+    display: flex; /* NEEDED for proper image thumbnail (span block) wrapping on mobile */
+}
+@media screen and (max-width: 1152px) { /* 1152 = 1.5 x 768 (commonly used for mobile) */
+    #imagelist .blockbody {
+        max-width: 720px; /* 720 = 0.75 x 960 (as used above) */
+    }
+}
 .blockbody a img {
     border-width: 3px !important;
     border-style: solid;
