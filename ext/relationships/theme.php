@@ -10,7 +10,7 @@ class RelationshipsTheme extends Themelet
         $string_style = "strong";
 
         if (!is_null($image->source)) {
-            $source_type = "EX FILE";
+            $source_type = "EX FILE (Source Link)";
             if (strpos($image->source, '_hq.') !== false) {
                 $source_type = "High Quality Ver.";
             }
