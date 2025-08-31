@@ -13,7 +13,7 @@ class CustomUserPageTheme extends UserPageTheme
 				<table summary='Login Form'>
 					<tr>
 						<td width='70'><label for='user'>Name</label></td>
-						<td width='70'><input id='user' type='text' name='user'></td>
+						<td width='140'><input id='user' type='text' name='user'></td>
 					</tr>
 					<tr>
 						<td><label for='pass'>Password</label></td>
