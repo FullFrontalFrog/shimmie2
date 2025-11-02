@@ -45,7 +45,7 @@ class CustomViewImageTheme extends ViewImageTheme
                 }
                 if ($a == "@KetRalus")
                 {
-                    $url = "https://twitter.com/KetRalus";
+                    $url = "https://x.com/KetRalus";
                     $a = "Ket Ralus";
                 }
                 else
@@ -84,7 +84,7 @@ class CustomViewImageTheme extends ViewImageTheme
         {
             return $result['link'];
         }
-        $twitter = "https://twitter.com/";
+        $twitter = "https://x.com/";
         return str_replace("@", $twitter, $artist);
     }
 
