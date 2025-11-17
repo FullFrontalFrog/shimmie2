@@ -349,29 +349,8 @@ abstract class DataHandlerExtension extends Extension
     {
 		//KET RALUS CUSTOM begin
 
-		$is_private = FALSE;
-		$tags = $event->metadata['tags'];
-		if (is_array($tags)) {
-            $key = FALSE;
-            foreach ($tags as $k => $t) {
-                if (strcasecmp($t, 'private') === 0) {
-                    $key = $k;
-                    break;
-                }
-            }
-			if ($key !== FALSE) {
-				$is_private = TRUE;
-                unset($event->metadata['tags'][$key]);
-			}
-		} else {
-			if (preg_match("/\bprivate\b/i", $tags)) {
-				$is_private = TRUE;
-                $event->metadata['tags'] = preg_replace("/\bprivate\b/i", " ", $tags);
-			}
-		}
-		if ($is_private) {
-			$event->metadata['rating'] = "p";
-		}
+		//ALL UPLOADS ARE RATED "p" FOR PRIVATE, BY DEFAULT
+		$event->metadata['rating'] = "p";
 
 		//KET RALUS CUSTOM end
 
