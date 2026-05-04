@@ -10,9 +10,15 @@ class RelationshipsTheme extends Themelet
         $string_style = "strong";
 
         if (!is_null($image->source)) {
-            $source_type = "EX FILE (Source Link)";
+            $source_type = "";
             if (strpos($image->source, '_hq.') !== false) {
                 $source_type = "High Quality Ver.";
+            }
+            else if (strpos($image->source, 'ket-ralus.com') !== false) {
+                $source_type = "EX FILE (Source Link)";
+            }
+            else {
+                $source_type = "External Source Link";
             }
             $string_output .= " <a href='$image->source' target='_blank'>$source_type</a>";
         }
