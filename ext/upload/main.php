@@ -140,7 +140,7 @@ class Upload extends Extension
     {
         global $user;
         if ($user->can(Permissions::CREATE_IMAGE)) {
-            $event->add_nav_link("upload", new Link('upload'), "Upload");
+            $event->add_nav_link("upload", new Link('upload'), "Upload", null, 30);
         }
     }
 

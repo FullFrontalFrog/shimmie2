@@ -155,7 +155,7 @@ class CommentList extends Extension
 
     public function onPageNavBuilding(PageNavBuildingEvent $event)
     {
-        $event->add_nav_link("comment", new Link('comment/list'), "Comments");
+        $event->add_nav_link("comment", new Link('comment/list'), "Comments", null, 60);
     }
 
 

@@ -141,7 +141,7 @@ class Pools extends Extension
 
     public function onPageNavBuilding(PageNavBuildingEvent $event)
     {
-        $event->add_nav_link("pool", new Link('pool/list'), "Pools");
+        $event->add_nav_link("pool", new Link('pool/list'), "Pools", null, 40);
     }
 
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)

@@ -90,7 +90,7 @@ class HelpPages extends Extension
 
     public function onPageNavBuilding(PageNavBuildingEvent $event)
     {
-        $event->add_nav_link("help", new Link('help'), "Help");
+        $event->add_nav_link("help", new Link('help'), "Help", null, 80);
     }
 
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)

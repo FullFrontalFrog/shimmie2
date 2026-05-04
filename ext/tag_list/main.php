@@ -97,7 +97,7 @@ class TagList extends Extension
 
     public function onPageNavBuilding(PageNavBuildingEvent $event)
     {
-        $event->add_nav_link("tags", new Link('tags/map'), "Tags");
+        $event->add_nav_link("tags", new Link('tags/map'), "Tags", null, 70);
     }
 
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)
