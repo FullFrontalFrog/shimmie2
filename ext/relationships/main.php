@@ -125,6 +125,12 @@ class Relationships extends Extension
 
     public function onImageRelationshipSet(ImageRelationshipSetEvent $event)
     {
+        // KET RALUS CUSTOM: Do not allow a child id less than or equal to a parent id.
+        // We require a child id (newer) to be greater than a parent id (older).
+        if ($event->child_id <= $event->parent_id) {
+            return;
+        }
+
         global $database;
 
         $old_parent = $database->get_one("SELECT parent_id FROM images WHERE id = :cid", ["cid"=>$event->child_id]);
