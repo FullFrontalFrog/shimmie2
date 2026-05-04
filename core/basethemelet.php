@@ -62,23 +62,22 @@ class BaseThemelet
         }
 
         $custom_classes = "";
-        if (class_exists("Relationships")) {
+        // KET RALUS CUSTOM: Red border for private (p). Silver border for unlisted (d).
+        // For other ratings, color based on parent/child relationships, as applicable.
+        $rating = $image->rating;
+        if ($rating == "p") {
+            $custom_classes .= "shm-thumb-is_private ";
+        }
+        else if ($rating == "d") {
+            $custom_classes .= "shm-thumb-is_unlisted ";
+        }
+        else if (class_exists("Relationships")) {
             if (property_exists($image, 'parent_id') && $image->parent_id !== null) {
                 $custom_classes .= "shm-thumb-has_parent ";
             }
             if (property_exists($image, 'has_children') && bool_escape($image->has_children)) {
                 $custom_classes .= "shm-thumb-has_child ";
             }
-        }
-
-        $rating = $image->rating;
-        if ($rating == "d")
-        {
-            $custom_classes .= "shm-thumb-is_unlisted ";
-        }
-        else if ($rating == "p")
-        {
-            $custom_classes .= "shm-thumb-is_private ";
         }
 
         return "<a href='$h_view_link' class='thumb shm-thumb shm-thumb-link {$custom_classes}' data-tags='$h_tags' data-post-id='$i_id'>".
