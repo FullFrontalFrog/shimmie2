@@ -1,23 +1,28 @@
 <?php
 class PoolsTest extends ShimmiePHPUnitTestCase
 {
+    // KET RALUS CUSTOM: Only a pools admin can create pools.
     public function testPools()
     {
         $this->get_page('pool/list');
         $this->assert_title("Pools");
 
         $this->get_page('pool/new');
-        $this->assert_title("Error");
+        $this->assert_title("Permission Denied");
 
         $this->log_in_as_user();
         $this->get_page('pool/list');
 
-        $this->markTestIncomplete();
+        //$this->markTestIncomplete();
 
-        $this->click("Create Pool");
-        $this->assert_title("Create Pool");
-        $this->click("Create");
-        $this->assert_title("Error");
+        //$this->click("Create Pool");
+        //$this->assert_title("Create Pool");
+        $this->get_page('pool/new');
+        $this->assert_title("Permission Denied");
+
+        $this->log_out();
+
+        $this->log_in_as_admin();
 
         $this->get_page('pool/new');
         $this->assert_title("Create Pool");
@@ -25,11 +30,6 @@ class PoolsTest extends ShimmiePHPUnitTestCase
         $this->set_field("description", "Test pool description");
         $this->click("Create");
         $this->assert_title("Pool: Test Pool Title");
-
-        $this->log_out();
-
-
-        $this->log_in_as_admin();
 
         $this->get_page('pool/list');
         $this->click("Test Pool Title");

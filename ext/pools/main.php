@@ -146,15 +146,18 @@ class Pools extends Extension
 
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)
     {
+        global $user;
+
         if ($event->parent=="pool") {
             $event->add_nav_link("pool_list", new Link('pool/list'), "List");
-            $event->add_nav_link("pool_new", new Link('pool/new'), "Create");
+            // KET RALUS CUSTOM: Only a pools admin can create pools.
+            if ($user->can(Permissions::POOLS_ADMIN)) {
+                $event->add_nav_link("pool_new", new Link('pool/new'), "Create");
+            }
             $event->add_nav_link("pool_updated", new Link('pool/updated'), "Changes");
             $event->add_nav_link("pool_help", new Link('ext_doc/pools'), "Help");
         }
     }
-
-
 
     public function onPageRequest(PageRequestEvent $event)
     {
@@ -177,15 +180,20 @@ class Pools extends Extension
                     break;
 
                 case "new": // Show form for new pools
-                    if (!$user->is_anonymous()) {
+                    // KET RALUS CUSTOM: Only a pools admin can create pools.
+                    if ($user->can(Permissions::POOLS_ADMIN)) {
                         $this->theme->new_pool_composer($page);
                     } else {
-                        $errMessage = "You must be registered and logged in to create a new pool.";
-                        $this->theme->display_error(401, "Error", $errMessage);
+                        $this->theme->display_error(403, "Permission Denied", "You do not have permission to create pools.");
                     }
                     break;
 
                 case "create": // ADD _POST
+                    // KET RALUS CUSTOM: Only a pools admin can create pools.
+                    if (!$user->can(Permissions::POOLS_ADMIN)) {
+                        $this->theme->display_error(403, "Permission Denied", "You do not have permission to create pools.");
+                        break;
+                    }
                     try {
                         $title = $_POST["title"];
                         $event = new PoolCreationEvent(
@@ -328,7 +336,7 @@ class Pools extends Extension
      */
     public function onDisplayingImage(DisplayingImageEvent $event)
     {
-        global $config;
+        global $config, $user;
 
         if ($config->get_bool(PoolsConfig::INFO_ON_VIEW_IMAGE)) {
             $imageID = $event->image->id;
@@ -339,6 +347,10 @@ class Pools extends Extension
             $navInfo = [];
             foreach ($poolsIDs as $poolID) {
                 $pool = $this->get_single_pool($poolID);
+                // KET RALUS CUSTOM: Exclude null or unviewable pools.
+                if ($pool === null || !$this->can_view_pool($user, $pool)) {
+                    continue;
+                }
 
                 $navInfo[$pool['id']] = [];
                 $navInfo[$pool['id']]['info'] = $pool;
@@ -483,8 +495,8 @@ class Pools extends Extension
      */
     private function have_permission(User $user, array $pool): bool
     {
-        // If the pool is public and user is logged OR if the user is admin OR if the pool is owned by the user.
-        if ((($pool['public'] == "Y" || $pool['public'] == "y") && !$user->is_anonymous()) || $user->can(Permissions::POOLS_ADMIN) || $user->id == $pool['user_id']) {
+        // KET RALUS CUSTOM: Only a pools admin or the pool owner has permission to modify the pool.
+        if ($user->can(Permissions::POOLS_ADMIN) || $user->id == $pool['user_id']) {
             return true;
         } else {
             return false;
@@ -492,15 +504,34 @@ class Pools extends Extension
     }
 
     /**
+     * KET RALUS CUSTOM
+     * Check if the given user may open the pool view page and see it in pool navigation blocks.
+     * Public pools are visible to anyone; private pools only to the owner and pools admins.
+     */
+    private function can_view_pool(User $user, array $pool): bool
+    {
+        if (($pool['public'] ?? '') == 'Y' || ($pool['public'] ?? '') == 'y') {
+            return true;
+        }
+        return $this->have_permission($user, $pool);
+    }
+
+    /**
      * HERE WE GET THE LIST OF POOLS.
      */
     private function list_pools(Page $page, int $pageNumber)
     {
-        global $config, $database;
+        global $config, $database, $user;
 
         $pageNumber = clamp($pageNumber, 1, null) - 1;
 
         $poolsPerPage = $config->get_int(PoolsConfig::LISTS_PER_PAGE);
+
+        // KET RALUS CUSTOM: $where_visibility variable added to show public pools only, unless user is a pools admin.
+        $where_visibility = "";
+        if (!$user->can(Permissions::POOLS_ADMIN)) {
+            $where_visibility = "WHERE (p.public = 'Y' OR p.public = 'y')";
+        }
 
         $order_by = "";
         $order = $page->get_cookie("ui-order-pool");
@@ -520,11 +551,12 @@ class Pools extends Extension
 			FROM pools AS p
 			INNER JOIN users AS u
 			ON p.user_id = u.id
+			$where_visibility
 			$order_by
 			LIMIT :l OFFSET :o
 		", ["l" => $poolsPerPage, "o" => $pageNumber * $poolsPerPage]);
 
-        $totalPages = ceil($database->get_one("SELECT COUNT(*) FROM pools") / $poolsPerPage);
+        $totalPages = ceil($database->get_one("SELECT COUNT(*) FROM pools p $where_visibility") / $poolsPerPage);
 
         $this->theme->list_pools($page, $pools, $pageNumber + 1, $totalPages);
     }
@@ -782,7 +814,17 @@ class Pools extends Extension
         $pageNumber = $event->try_page_num(2) - 1;
 
         $poolID = int_escape($poolID);
-        $pool = $this->get_pool($poolID);
+        // KET RALUS CUSTOM: Exclude null or unviewable pools.
+        $poolRow = $this->get_single_pool($poolID);
+        if ($poolRow === null) {
+            $this->theme->display_error(404, "Not Found", "No such pool.");
+            return;
+        }
+        if (!$this->can_view_pool($user, $poolRow)) {
+            $this->theme->display_error(403, "Permission Denied", "You do not have permission to view this pool.");
+            return;
+        }
+        $pool = [$poolRow];
 
         $imagesPerPage = $config->get_int(PoolsConfig::IMAGES_PER_PAGE);
 

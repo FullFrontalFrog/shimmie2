@@ -128,7 +128,14 @@ class PoolsTheme extends Themelet
 
         $poolnav_html = '
 			<a href="' . make_link("pool/list") . '">Pool Index</a>
+		';
+        // KET RALUS CUSTOM: Only a pools admin can create pools.
+        if ($user->can(Permissions::POOLS_ADMIN)) {
+            $poolnav_html .= '
 			<br><a href="' . make_link("pool/new") . '">Create Pool</a>
+		';
+        }
+        $poolnav_html .= '
 			<br><a href="' . make_link("pool/updated") . '">Pool Changes</a>
 		';
 
@@ -137,10 +144,9 @@ class PoolsTheme extends Themelet
 
         if (!is_null($pools) && count($pools) == 1) {
             $pool = $pools[0];
-            if ($pool['public'] == "Y" || $user->can(Permissions::POOLS_ADMIN)) {// IF THE POOL IS PUBLIC OR IS ADMIN SHOW EDIT PANEL
-                if (!$user->is_anonymous()) {// IF THE USER IS REGISTERED AND LOGGED IN SHOW EDIT PANEL
-                    $this->sidebar_options($page, $pool, $check_all);
-                }
+            // KET RALUS CUSTOM: Only a pools admin or the pool owner can see the edit panel sidebar.
+            if ($user->can(Permissions::POOLS_ADMIN) || $user->id == $pool['user_id']) {
+                $this->sidebar_options($page, $pool, $check_all);
             }
 
             $tfe = new TextFormattingEvent($pool['description']);
