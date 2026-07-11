@@ -160,9 +160,16 @@ class CustomIndexTheme extends IndexTheme
             }
             $query = url_escape(implode(' ', $this->search_terms));
             $query_text = urldecode($query);
-            $block_title = (strtoupper($query_text) === '!A')
-                ? "Newest Art $page_paren"
-                : "Query: $query_text $page_paren";
+            $metatag = strtoupper($query_text);
+            if ($metatag === '!A') {
+                $block_title = "Newest Art $page_paren";
+            } elseif ($metatag === '!R') {
+                $block_title = "Newest References $page_paren";
+            } elseif ($query_text === '!*') {
+                $block_title = "Newest Art & References $page_paren";
+            } else {
+                $block_title = "Query: $query_text $page_paren";
+            }
             $page->add_block(new Block(null, $this->build_table($images, "#search=$query"), "main", 10, "image-list"));
             $this->display_paginator($page, "post/list/$query", null, $this->page_number, $this->total_pages, true, $block_title);
         } else {
