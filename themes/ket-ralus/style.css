@@ -524,6 +524,7 @@ display:none;
     display: inline-block;
     height: 226px;
     width: 226px;
+    text-align: center;
 }
 .shm-image-list .shm-thumb-link {
     display: block;
