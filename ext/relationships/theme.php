@@ -20,18 +20,18 @@ class RelationshipsTheme extends Themelet
             else {
                 $source_type = "External Source Link";
             }
-            $string_output .= " <a href='$image->source' target='_blank'>$source_type</a>";
+            $string_output .= $this->bracketed("<a href='$image->source' target='_blank'>$source_type</a>");
         }
 
         if ($image->parent_id !== null) {
-            $string_output .= " ↓<a href='".make_link("post/view/".$image->parent_id)."'>$image->parent_id</a>";
+            $string_output .= $this->related_link("↓", (int)$image->parent_id);
         }
 
         if (bool_escape($image->has_children)) {
             $ids = $database->get_col("SELECT id FROM images WHERE parent_id = :iid", ["iid"=>$image->id]);
 
             foreach ($ids as $id) {
-                $string_output .= " ↑<a href='".make_link('post/view/'.$id)."'>{$id}</a>";
+                $string_output .= $this->related_link("↑", (int)$id);
             }
         }
 
@@ -41,6 +41,25 @@ class RelationshipsTheme extends Themelet
         }
 
         $page->add_block(new Block(null, "<span style='color: #999999;'>>> RELATED IMAGES:</span><$string_style>$string_output</$string_style>", "main", 5));
+    }
+
+    private function related_link(string $arrow, int $id): string
+    {
+        $label = $id." ".$arrow;
+        $related = Image::by_id($id);
+        if ($related !== null && Extension::is_enabled(PostTitlesInfo::KEY)) {
+            $title = PostTitles::get_title($related);
+            if ($title !== "") {
+                $label .= " ".html_escape($title);
+            }
+        }
+        return $this->bracketed("<a href='".make_link("post/view/".$id)."'>$label</a>");
+    }
+
+    private function bracketed(string $html): string
+    {
+        $bracket = "<span style='color: #999999;'>%s</span>";
+        return " ".sprintf($bracket, "[").$html.sprintf($bracket, "]");
     }
 
     public function get_parent_editor_html(Image $image): string

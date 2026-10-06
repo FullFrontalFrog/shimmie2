@@ -240,11 +240,11 @@ class CustomViewImageTheme extends ViewImageTheme
         if (Extension::is_enabled(PostTitlesInfo::KEY)) {
             $title = PostTitles::get_title($image);
         }
-        $part_open = "<span style='font-size: 69%; vertical-align: center;'>";
+        $part_open = "<span style='font-size: 69%; vertical-align: 0.08em; color: rgba(0, 0, 0, 0.3);'>";
         $part_close = "</span>";
         $title = preg_replace(
             '/\[(\d+)\/(\d+)\]/',
-            $part_open.'[$1<em style="letter-spacing: 0.2em;">/</em>$2]'.$part_close,
+            $part_open.'[<span style="color: black;">$1</span><em style="font-size: 72.5%;">of </em>$2]'.$part_close,
             $title
         );
         $year_open = "<span style='opacity: 0.3'>";

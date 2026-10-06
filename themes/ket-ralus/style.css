@@ -12,11 +12,12 @@ a:link, a:visited {
     text-decoration:none;
 }
 a:hover {
-    color:#D5CC00; /* HOVER GOLD */
+    color:#317900;
     text-decoration:none;
+    background-color:#fff777;
 }
 a:active {
-    color:#D5CC33;
+    color:#317900;
     text-decoration:none;
 }
 HEADER ul#navbar li a {
@@ -47,7 +48,7 @@ div#paginator a {
 div#paginator a:hover {
     background:#fff777 none repeat scroll 0 0;
     border:1px solid #D5CC00;
-    color:black;
+    color:#317900;
     -moz-background-clip:border;
     -moz-background-inline-policy:continuous;
     -moz-background-origin:padding;
